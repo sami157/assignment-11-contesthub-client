@@ -4,7 +4,7 @@ import logo from '../assets/logo.png'
 
 export default function Navbar() {
     return (
-        <div className='flex gap-2 items-center justify-between bg-base-300 px-[2vw] py-[1vw] rounded-full'>
+        <div className='flex gap-2 items-center justify-between bg-base-300 px-[1vw] py-[0.1vw] rounded-full'>
             <Link to='/' className='flex items-center'>
                 <img className='w-40 -mx-8' src={logo}></img>
                 <div>

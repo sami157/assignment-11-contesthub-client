@@ -1,41 +1,32 @@
 import { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router';
+import { Link, useNavigate, useLocation, Form } from 'react-router';
 import { Eye, EyeOff } from 'lucide-react';
 import GoogleLogin from '../components/GoogleLogin';
 import toast from 'react-hot-toast';
 import FormSkeleton from '../components/skeleton/FormSkeleton';
 import useAuth from '../hooks/useAuth';
-//import { useForm } from 'react-hook-form';
+import Lottie from 'lottie-react';
+//import registerLottie from '../assets/animation/register.json'
+import { useForm } from 'react-hook-form';
 
 const Register = () => {
     const navigate = useNavigate()
     const location = useLocation()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { signInUser, createUser, loading, errorMessage, setErrorMessage, updateUserProfile } = useAuth()
     const [invalidPassword, setInvalidPassword] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
-    const handleSignUp = (event) => {
-        const form = event.target
-        event.preventDefault()
-        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
-        if (!passwordRegex.test(form.password.value)) {
-            setInvalidPassword(true)
-            return;
-        }
-        else {
-            setInvalidPassword(false)
-            createUser(form.email.value, form.password.value)
-                .then(() => {
-                    updateUserProfile(form.name.value, form.photoUrl.value)
-                    toast.success('Registered successfully')
-                    form.reset()
-                    navigate(`${location.state ? location.state : '/'}`)
-                })
-                .catch((error) => {
-                    toast.error('Registration failed!')
-                    setErrorMessage(error.message)
-                })
-        }
+    const handleSignUp = async (data) => {
+        try {
+            await createUser(data.email, data.password);
+            console.log('Yaay');
+            toast.success('Registration successful');
+            reset(); 
+            navigate('/');
 
+        } catch (error) {
+            console.error('Registration failed:', error);
+        }
     }
     const handleGoogleLogin = () => {
         signInUser('', '', true).then(() => {
@@ -50,34 +41,72 @@ const Register = () => {
     return (
         loading ? <FormSkeleton />
             : (
-                <div className="flex flex-col gap-4 justify-center items-center min-h-screen">
-                    <h1 className="text-5xl font-bold title-font text-center">Register Now!</h1>
-                    <GoogleLogin onClickAction={handleGoogleLogin}></GoogleLogin>
-                    <p className='title-font'>Or,</p>
-                    <div className="flex flex-col bg-base-200 glass w-[92vw] md:w-[400px] p-8 rounded-xl">
-                        <form onSubmit={handleSignUp} className="fieldset">
-                            <label className="label">Name</label>
-                            <input name='name' type='text' required className="input w-full border-0 rounded-lg" placeholder="" />
-                            <label className="label">Photo URL</label>
-                            <input name='photoUrl' type='text' className="input w-full border-0 rounded-lg" placeholder="" />
-                            <label className="label">Email</label>
-                            <input name='email' type="email" required className="input w-full rounded-lg border-0" placeholder="" />
-                            <label className="label">Password</label>
-                            <div className="relative">
-                                <input name='password' type={showPassword ? "text" : "password"} required className="input w-full pr-12 rounded-lg border-0" placeholder="" />
-                                <button
-                                    type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 z-10"
-                                >
-                                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                                </button>
-                            </div>
-                            {invalidPassword && <div><p className="text-red-500">Password must be at least 6 characters containing at least an uppercase and one lowercase character</p></div>}
-                            <button type='submit' className="btn btn-neutral text-white bg-none mt-3 rounded-lg shadow-none">Register</button>
+                <div className='flex items-center w-11/12 mx-auto justify-between'>
+                    <div className="flex flex-col gap-4 justify-center items-center min-h-screen">
+                        <h1 className="text-5xl font-bold title-font text-center">Register Now!</h1>
+                        <GoogleLogin onClickAction={handleGoogleLogin}></GoogleLogin>
+                        <p>Or,</p>
+                        <form onSubmit={handleSubmit(handleSignUp)} className='bg-base-200 p-4 rounded-2xl w-full'>
+                            <fieldset className='flex flex-col gap-1'>
+
+                                <label className="label">Name</label>
+                                <input
+                                    type='text'
+                                    className="input w-full bg-white border-0 rounded-lg"
+                                    placeholder="Your Name"
+                                    {...register("name", { required: "Name is required" })}
+                                />
+                                {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+
+                                <label className="label">Email</label>
+                                <input
+                                    type="email"
+                                    className="input w-full rounded-lg border-0"
+                                    placeholder="you@example.com"
+                                    {...register("email", {
+                                        required: "Email is required",
+                                        pattern: {
+                                            value: /^\S+@\S+$/i,
+                                            message: "Please enter a valid email address"
+                                        }
+                                    })}
+                                />
+                                {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+
+                                <label className="label">Photo URL</label>
+                                <input
+                                    type='text'
+                                    className="input w-full border-0 rounded-lg"
+                                    placeholder="https://example.com/photo.jpg"
+                                    {...register("photoUrl")}
+                                />
+
+                                <label className="label">Password</label>
+                                <div className="relative">
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        className="input w-full pr-12 rounded-lg border-0"
+                                        placeholder="••••••••"
+                                        {...register("password", {
+                                            required: "Password is required",
+                                            minLength: { value: 6, message: "Password must be at least 6 characters" },
+                                            pattern: {
+                                                value: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
+                                                message: "Must contain at least 6 characters, one uppercase, and one lowercase letter"
+                                            }
+                                        })}
+                                    />
+                                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-2 top-1/2 -translate-y-1/2 z-10"> {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}</button>
+                                </div>
+                                {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+                            </fieldset>
+                            <button type='submit' className="btn btn-neutral text-white bg-none w-full mt-3 rounded-lg shadow-none">Register</button>
                             <p className='text-red-400'>{errorMessage ? errorMessage : ''}</p>
                             <p>Already have an account? <Link className='font-bold' to='/login'>Sign In</Link></p>
                         </form>
+                    </div>
+                    <div className='w-1/3'>
+                        {/* <Lottie animationData={registerLottie} loop={false} />; */}
                     </div>
                 </div>
             )
