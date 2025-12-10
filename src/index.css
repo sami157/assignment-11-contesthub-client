@@ -2,6 +2,42 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(97.466% 0.011 259.822);
+  --color-base-300: oklch(93.268% 0.016 262.751);
+  --color-base-content: oklch(41.886% 0.053 255.824);
+  --color-primary: oklch(42.551% 0.161 282.339);
+  --color-primary-content: oklch(91.372% 0.051 257.57);
+  --color-secondary: oklch(48% 0.243 264.376);
+  --color-secondary-content: oklch(88.51% 0.032 282.339);
+  --color-accent: oklch(59.939% 0.191 335.171);
+  --color-accent-content: oklch(11.988% 0.038 335.171);
+  --color-neutral: oklch(19.616% 0.063 257.651);
+  --color-neutral-content: oklch(83.923% 0.012 257.651);
+  --color-info: oklch(37% 0.01 67.558);
+  --color-info-content: oklch(86% 0.005 56.366);
+  --color-success: oklch(90% 0.093 164.15);
+  --color-success-content: oklch(59% 0.145 163.225);
+  --color-warning: oklch(89.172% 0.045 71.47);
+  --color-warning-content: oklch(17.834% 0.009 71.47);
+  --color-error: oklch(50% 0.213 27.518);
+  --color-error-content: oklch(88% 0.062 18.334);
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 1;
+}
+
+
 .title-font {
   font-family: "Zalando Sans Expanded", sans-serif;
   font-optical-sizing: auto;
@@ -10,8 +46,14 @@
 
 * {
   font-family: "Google Sans Flex", sans-serif;
-  font-weight: 300;
   font-variation-settings:
     "wdth" 100,
-    "ROND" 50;
+    "ROND" 25;
+}
+
+a.active {
+  background-color: aliceblue;
+  color: #000;
+  padding: 4px 12px;
+  border-radius: 48px;
 }
