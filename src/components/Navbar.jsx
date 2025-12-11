@@ -1,8 +1,31 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router'
+import { Link, NavLink, useNavigate } from 'react-router'
 import logo from '../assets/logo.png'
+import useAuth from '../hooks/useAuth'
+import toast from 'react-hot-toast'
 
 export default function Navbar() {
+    const {user, signOutUser} = useAuth()
+    const navigate = useNavigate()
+    const handleClick = async() => {
+        try {
+            toast.promise(
+                async () => {
+                    await signOutUser()
+                    await navigate('/')
+                },
+                {
+                    loading: 'Logging out',
+                    success: 'Logged out Successfully',
+                    error: 'Logout failed',
+                }
+            )
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+    
+    console.log(user);
     return (
         <div className='flex gap-2 items-center justify-between bg-base-300 px-[1vw] py-[0.1vw] rounded-full'>
             <Link to='/' className='flex items-center'>
@@ -16,15 +39,17 @@ export default function Navbar() {
                 <NavLink className='hover:bg-white/40 rounded-xl px-3 py-2' to='/'>Home</NavLink>
                 <NavLink className='hover:bg-white/40 rounded-xl px-3 py-2' to='/all-contets'>All Contests</NavLink>
                 <NavLink className='hover:bg-white/40 rounded-xl px-3 py-2' to='/extra'>Extra</NavLink>
-                <NavLink className='hover:bg-white/40 rounded-xl px-3 py-2' to='/register'>Register</NavLink>
-                {/* <div className="dropdown dropdown-end">
-                    <div tabIndex={0} role="button" className="btn m-1">Picture</div>
-                    <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 shadow-sm">
-                        <li><a>User Name</a></li>
-                        <li><a>Dashboard</a></li>
-                        <li><a>Logout</a></li>
-                    </ul>
-                </div> */}
+                {
+                    user ? <div className="dropdown dropdown-end">
+                        <div tabIndex={0} role="button" className="btn m-1 bg-white/0 border-0">
+                            <img className='w-12 h-12 object-cover rounded-full' src={user.photoURL || 'https://cdn-icons-png.flaticon.com/512/1/1247.png' } alt="" />
+                        </div>
+                        <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 shadow-sm">
+                            <li><a>Dashboard</a></li>
+                            <li><a onClick={handleClick}>Logout</a></li>
+                        </ul>
+                    </div> : <NavLink className='hover:bg-white/40 rounded-xl px-3 py-2' to='/login'>Login</NavLink>
+                }
             </div>
         </div>
     )

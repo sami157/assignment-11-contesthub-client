@@ -15,13 +15,20 @@ const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { signInUser, createUser, loading, errorMessage, setErrorMessage, updateUserProfile } = useAuth()
     const [showPassword, setShowPassword] = useState(false)
-    const handleSignUp = async (data) => {
+    const handleSignUp = (data) => {
         try {
-            await createUser(data.email, data.password)
-            await updateUserProfile(data.name, data.photoUrl)
-            toast.success('Form Submitted');
-            navigate('/');
-
+            toast.promise(
+                async () => {
+                    await createUser(data.email, data.password)
+                    await updateUserProfile(data.name, data.photoUrl)
+                    await navigate('/')
+                },
+                {
+                    loading: 'Registration in progress',
+                    success: 'Registered Successfully',
+                    error: 'Registration failed',
+                }
+            )
         } catch (error) {
             toast.error(error.message)
         }
