@@ -13,10 +13,10 @@ export default function Navbar() {
                 </div>
             </Link>
             <div className='flex items-center gap-6 text-[16px] font-bold'>
-                <NavLink className='hover:bg-white/40 rounded-full px-3 py-2' to='/'>Home</NavLink>
-                <NavLink className='hover:bg-white/40 rounded-full px-3 py-2' to='/all-contets'>All Contests</NavLink>
-                <NavLink className='hover:bg-white/40 rounded-full px-3 py-2' to='/extra'>Extra</NavLink>
-                <NavLink className='hover:bg-white/40 rounded-full px-3 py-2' to='/register'>Register</NavLink>
+                <NavLink className='hover:bg-white/40 rounded-xl px-3 py-2' to='/'>Home</NavLink>
+                <NavLink className='hover:bg-white/40 rounded-xl px-3 py-2' to='/all-contets'>All Contests</NavLink>
+                <NavLink className='hover:bg-white/40 rounded-xl px-3 py-2' to='/extra'>Extra</NavLink>
+                <NavLink className='hover:bg-white/40 rounded-xl px-3 py-2' to='/register'>Register</NavLink>
                 {/* <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn m-1">Picture</div>
                     <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 shadow-sm">

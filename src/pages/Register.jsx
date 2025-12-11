@@ -6,26 +6,24 @@ import toast from 'react-hot-toast';
 import FormSkeleton from '../components/skeleton/FormSkeleton';
 import useAuth from '../hooks/useAuth';
 import Lottie from 'lottie-react';
-//import registerLottie from '../assets/animation/register.json'
+import registerLottie from '../assets/animation/register.json'
 import { useForm } from 'react-hook-form';
 
 const Register = () => {
     const navigate = useNavigate()
     const location = useLocation()
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const { signInUser, createUser, loading, errorMessage, setErrorMessage, updateUserProfile } = useAuth()
-    const [invalidPassword, setInvalidPassword] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
     const handleSignUp = async (data) => {
         try {
-            await createUser(data.email, data.password);
-            console.log('Yaay');
-            toast.success('Registration successful');
-            reset(); 
+            await createUser(data.email, data.password)
+            await updateUserProfile(data.name, data.photoUrl)
+            toast.success('Form Submitted');
             navigate('/');
 
         } catch (error) {
-            console.error('Registration failed:', error);
+            toast.error(error.message)
         }
     }
     const handleGoogleLogin = () => {
@@ -41,12 +39,12 @@ const Register = () => {
     return (
         loading ? <FormSkeleton />
             : (
-                <div className='flex items-center w-11/12 mx-auto justify-between'>
+                <div className='flex flex-col md:flex-row items-center w-11/12 md:w-7/12 mx-auto justify-between'>
                     <div className="flex flex-col gap-4 justify-center items-center min-h-screen">
                         <h1 className="text-5xl font-bold title-font text-center">Register Now!</h1>
                         <GoogleLogin onClickAction={handleGoogleLogin}></GoogleLogin>
                         <p>Or,</p>
-                        <form onSubmit={handleSubmit(handleSignUp)} className='bg-base-200 p-4 rounded-2xl w-full'>
+                        <form onSubmit={handleSubmit(handleSignUp)} className='bg-base-200 p-5 rounded-2xl w-full'>
                             <fieldset className='flex flex-col gap-1'>
 
                                 <label className="label">Name</label>
@@ -105,8 +103,8 @@ const Register = () => {
                             <p>Already have an account? <Link className='font-bold' to='/login'>Sign In</Link></p>
                         </form>
                     </div>
-                    <div className='w-1/3'>
-                        {/* <Lottie animationData={registerLottie} loop={false} />; */}
+                    <div className='md:w-3/5'>
+                        <Lottie animationData={registerLottie} loop={false} />
                     </div>
                 </div>
             )
