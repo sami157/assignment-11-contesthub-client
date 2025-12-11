@@ -47,7 +47,7 @@ const Login = () => {
             : (
                 <div className='flex flex-col md:flex-row items-center w-11/12 md:w-7/12 mx-auto justify-between'>
                     <div className="flex flex-col gap-4 justify-center items-center min-h-screen">
-                        <h1 className="text-5xl font-bold title-font text-center">Register Now!</h1>
+                        <h1 className="text-5xl font-bold title-font text-center">Login</h1>
                         <GoogleLogin onClickAction={handleGoogleLogin}></GoogleLogin>
                         <p>Or,</p>
                         <form onSubmit={handleSubmit(handleLogin)} className='bg-base-200 p-5 rounded-2xl w-full'>
@@ -82,7 +82,7 @@ const Login = () => {
                                 </div>
                                 {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
                             </fieldset>
-                            <button type='submit' className="btn btn-neutral text-white bg-none w-full mt-3 rounded-lg shadow-none">Register</button>
+                            <button type='submit' className="btn btn-neutral text-white bg-none w-full mt-3 rounded-lg shadow-none">Login</button>
                             <p className='text-red-400'>{errorMessage ? errorMessage : ''}</p>
                             <p>Don't have an account? <Link className='font-bold' to='/register'>Register</Link></p>
                         </form>
