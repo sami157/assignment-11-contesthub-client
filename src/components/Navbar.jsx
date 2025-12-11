@@ -42,13 +42,14 @@ export default function Navbar() {
                 {
                     user ? <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn m-1 bg-white/0 border-0">
-                            <img className='w-12 h-12 object-cover rounded-full' src={user.photoURL || 'https://cdn-icons-png.flaticon.com/512/1/1247.png' } alt="" />
+                            <img className='w-13 h-13 object-cover rounded-full' src={user.photoURL || 'https://cdn-icons-png.flaticon.com/512/1/1247.png' } alt="" />
                         </div>
-                        <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 shadow-sm">
+                        <ul tabIndex="-1" className="dropdown-content menu bg-base-200 rounded-xl z-1 w-52 shadow-sm">
+                            <li className='px-3 py-2'>{user.displayName}</li>
                             <li><a>Dashboard</a></li>
                             <li><a onClick={handleClick}>Logout</a></li>
                         </ul>
-                    </div> : <NavLink className='hover:bg-white/40 rounded-xl px-3 py-2' to='/login'>Login</NavLink>
+                    </div> : <NavLink className='hover:bg-white/40 rounded-lg px-3 py-2' to='/login'>Login</NavLink>
                 }
             </div>
         </div>
