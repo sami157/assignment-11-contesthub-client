@@ -3,9 +3,11 @@ import { Link, NavLink, useNavigate } from 'react-router'
 import logo from '../assets/logo.png'
 import useAuth from '../hooks/useAuth'
 import toast from 'react-hot-toast'
+import useRole from '../hooks/useRole'
 
 export default function Navbar() {
-    const {user, role, signOutUser} = useAuth()
+    const {user, signOutUser} = useAuth()
+    const roleInfo = useRole()
     const navigate = useNavigate()
     const handleClick = async() => {
         try {
@@ -45,7 +47,7 @@ export default function Navbar() {
                         <ul tabIndex="-1" className="dropdown-content menu bg-base-200 rounded-xl z-1 w-52 shadow-sm">
                             <li className='px-3 py-2'>{user.displayName}</li>
                             {
-                                user && role === 'creator' &&
+                                user && roleInfo.role === 'creator' &&
                                     <li><a onClick={() => { navigate('/add-contest') }}>Add Contest</a></li>
                             }
                             <li><a onClick={() => {navigate('/dashboard')}}>Dashboard</a></li>

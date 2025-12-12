@@ -2,7 +2,6 @@ import {  useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, signInWithPopup, updateProfile, GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from './AuthContext.jsx';
 import { auth } from '../firebase/firebase.init';
-import useRole from '../hooks/useRole.js';
 
 const provider = new GoogleAuthProvider();
 
@@ -10,13 +9,10 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState()
     const [loading, setLoading] = useState(true)
     const [errorMessage, setErrorMessage] = useState('')
-    const [role, setRole] = useState('');
-    const userRole = useRole()
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             setUser(currentUser);
             setLoading(false);
-            setRole(userRole)
             setErrorMessage('');
         });
         return () => unsubscribe();
@@ -60,8 +56,7 @@ const AuthProvider = ({ children }) => {
         signOutUser,
         setErrorMessage,
         errorMessage,
-        updateUserProfile,
-        role
+        updateUserProfile
     }
     return (
         <AuthContext value={authData}>

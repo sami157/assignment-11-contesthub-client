@@ -1,12 +1,14 @@
 import Forbidden from '../components/error/Forbidden';
 import useAuth from '../hooks/useAuth';
+import useRole from '../hooks/useRole';
 
 const CreatorRoute = ({children}) => {
-    const { loading, user, role } = useAuth()
+    const { loading, user } = useAuth()
+    const roleObject = useRole()
     return (
         <div>
             {
-                user && role === 'creator' 
+                user && roleObject.role === 'creator' 
                     ? loading ? <p>Loading</p> : loading
                         ? <p>Loading</p>
                         : children
