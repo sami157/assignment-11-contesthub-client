@@ -1,21 +1,23 @@
 import React, { useEffect } from 'react';
 import { useQuery } from "@tanstack/react-query";
-import { useAxiosSecure } from '../hooks/useAxiosSecure';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
-import { MdAdminPanelSettings } from "react-icons/md";
 import { IoPersonAdd } from "react-icons/io5";
 import { FaShield } from "react-icons/fa6";
 import { SiCkeditor4 } from "react-icons/si";
+import useAuth from '../hooks/useAuth';
 
 const Dashboard = () => {
     const axiosSecure = useAxiosSecure();
-    const fetchData = async () => {
-        const response = await axiosSecure.get("/users");
-        return response.data;
-    }
+    const {user} = useAuth()
+
     const { data: users = [], isLoading, isSuccess, isError, refetch } = useQuery({
         queryKey: ["users"],
-        queryFn: fetchData
+        enabled: !!user,
+        queryFn: async () => {
+            const response = await axiosSecure.get("/users");
+            return response.data;
+        }
     });
 
     const changeRole = async(name, email, role) => {
@@ -38,7 +40,6 @@ const Dashboard = () => {
         }
     }
     
-
     useEffect(() => {
         if (isLoading) {
             toast.loading("Loading user list", { id: "users-toast" });
@@ -50,7 +51,6 @@ const Dashboard = () => {
             toast.error("Error loading user list", { id: "users-toast" });
         }
     }, [isLoading, isSuccess, isError]);
-
     if (isLoading) return <p>Loading </p>
     if (isError) return <p>Error fetching users.</p>;
     return (
@@ -97,7 +97,6 @@ const Dashboard = () => {
                                                         </div>
                                                     </div>
                                                 </td>
-
                                             </tr>
                                         );
                                     })

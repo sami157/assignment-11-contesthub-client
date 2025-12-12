@@ -9,7 +9,7 @@ import Lottie from 'lottie-react';
 import registerLottie from '../assets/animation/register.json'
 import { useForm } from 'react-hook-form';
 import { registerUser } from '../utils/registerUser';
-import { useAxiosSecure } from '../hooks/useAxiosSecure';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const Login = () => {
     const axiosSecure = useAxiosSecure()
