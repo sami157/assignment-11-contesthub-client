@@ -4,7 +4,7 @@ import Home from "../pages/Home";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import NotFound from "../components/NotFound";
-import AdminDashboard from "../pages/AdminDashboard";
+import Dashboard from "../pages/Dashboard";
 
 export const router = createBrowserRouter([
     {
@@ -24,8 +24,8 @@ export const router = createBrowserRouter([
                 Component: Login
             },
             {
-                path: '/dashboard/admin',
-                Component: AdminDashboard
+                path: '/dashboard',
+                Component: Dashboard
             },
             {
                 path: "*",
