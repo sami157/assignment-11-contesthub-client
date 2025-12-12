@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import NotFound from "../components/NotFound";
 import Dashboard from "../pages/Dashboard";
 import AddContest from "../pages/AddContest";
+import CreatorRoute from "../pages/CreatorRoute";
 
 export const router = createBrowserRouter([
     {
@@ -34,7 +35,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/add-contest',
-                Component: AddContest
+                element: <CreatorRoute><AddContest/></CreatorRoute>
             }
         ]
     },
