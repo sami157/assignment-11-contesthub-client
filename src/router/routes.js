@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import NotFound from "../components/NotFound";
+import AdminDashboard from "../pages/AdminDashboard";
 
 export const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
             {
                 path: '/login',
                 Component: Login
+            },
+            {
+                path: '/dashboard/admin',
+                Component: AdminDashboard
             },
             {
                 path: "*",

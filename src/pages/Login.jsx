@@ -8,12 +8,15 @@ import useAuth from '../hooks/useAuth';
 import Lottie from 'lottie-react';
 import registerLottie from '../assets/animation/register.json'
 import { useForm } from 'react-hook-form';
+import { registerUser } from '../utils/registerUser';
+import { useAxiosSecure } from '../hooks/useAxiosSecure';
 
 const Login = () => {
+    const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
     const location = useLocation()
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { signInUser, loading, errorMessage, setErrorMessage } = useAuth()
+    const { signInUser, loading, errorMessage, user } = useAuth()
     const [showPassword, setShowPassword] = useState(false)
     const handleLogin = data => {
         try {
@@ -33,14 +36,25 @@ const Login = () => {
         }
     }
     const handleGoogleLogin = () => {
-        signInUser('', '', true).then(() => {
-            toast.success('Logged in with Google Successfully')
-            navigate(`${location.state ? location.state : '/'}`)
-        })
-            .catch((error) => {
-                toast.error('Google Login failed!')
-                setErrorMessage(error.message)
-            })
+        try {
+            toast.promise(
+                async () => {
+                    await signInUser('', '', true)
+                    registerUser(axiosSecure, {
+                        name: user.displayName,
+                        email: user.email
+                    })
+                    navigate(`${location.state ? location.state : '/'}`)
+                },
+                {
+                    loading: 'Google Login in progress',
+                    success: 'Logged in with Google Successfully',
+                    error: 'Google Login failed',
+                }
+            )
+        } catch (error) {
+            toast.error(error.message)
+        }
     }
     return (
         loading ? <FormSkeleton />
