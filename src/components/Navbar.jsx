@@ -24,8 +24,6 @@ export default function Navbar() {
             toast.error(error.message)
         }
     }
-    
-    console.log(user);
     return (
         <div className='flex gap-2 items-center justify-between bg-base-300 px-[1vw] py-[0.1vw] rounded-full'>
             <Link to='/' className='flex items-center'>
@@ -46,6 +44,9 @@ export default function Navbar() {
                         </div>
                         <ul tabIndex="-1" className="dropdown-content menu bg-base-200 rounded-xl z-1 w-52 shadow-sm">
                             <li className='px-3 py-2'>{user.displayName}</li>
+                            {
+
+                            }
                             <li><a onClick={() => {navigate('/dashboard')}}>Dashboard</a></li>
                             <li><a onClick={handleClick}>Logout</a></li>
                         </ul>

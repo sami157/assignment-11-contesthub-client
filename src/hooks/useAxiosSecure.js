@@ -10,7 +10,7 @@ export const useAxiosSecure = () => {
     const { user } = useAuth()
     useEffect(() => {
         const requestInterceptor = axiosSecure.interceptors.request.use(config => {
-                config.headers.Authorization = `Bearer ${user.accessToken}`;
+                config.headers.Authorization = `Bearer ${user?.accessToken}`;
                 return config;
             }
         )

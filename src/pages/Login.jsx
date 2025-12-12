@@ -18,6 +18,7 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { signInUser, loading, errorMessage, user } = useAuth()
     const [showPassword, setShowPassword] = useState(false)
+    
     const handleLogin = data => {
         try {
             toast.promise(

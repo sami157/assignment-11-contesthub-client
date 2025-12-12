@@ -5,6 +5,7 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import NotFound from "../components/NotFound";
 import Dashboard from "../pages/Dashboard";
+import AddContest from "../pages/AddContest";
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
             {
                 path: "*",
                 Component: NotFound
+            },
+            {
+                path: '/add-contest',
+                Component: AddContest
             }
         ]
     },
