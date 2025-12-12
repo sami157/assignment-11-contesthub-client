@@ -5,7 +5,7 @@ import useAuth from '../hooks/useAuth'
 import toast from 'react-hot-toast'
 
 export default function Navbar() {
-    const {user, signOutUser} = useAuth()
+    const {user, role, signOutUser} = useAuth()
     const navigate = useNavigate()
     const handleClick = async() => {
         try {
@@ -45,7 +45,8 @@ export default function Navbar() {
                         <ul tabIndex="-1" className="dropdown-content menu bg-base-200 rounded-xl z-1 w-52 shadow-sm">
                             <li className='px-3 py-2'>{user.displayName}</li>
                             {
-
+                                user && role === 'creator' &&
+                                    <li><a onClick={() => { navigate('/add-contest') }}>Add Contest</a></li>
                             }
                             <li><a onClick={() => {navigate('/dashboard')}}>Dashboard</a></li>
                             <li><a onClick={handleClick}>Logout</a></li>
