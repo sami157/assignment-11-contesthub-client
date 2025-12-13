@@ -47,19 +47,19 @@ export default function Navbar() {
                         <ul tabIndex="-1" className="dropdown-content menu bg-base-200 rounded-xl z-1 w-52 shadow-sm">
                             <li className='px-3 py-2'>{user.displayName}</li>
                             {
-                                user && roleInfo.role === 'creator' &&
+                                user && !roleInfo.roleLoading && roleInfo.role === 'creator' &&
                                     <li><a onClick={() => { navigate('/add-contest') }}>Add Contest</a></li>
                             }
                             {
-                                user && roleInfo.role === 'creator' &&
+                                user && !roleInfo.roleLoading && roleInfo.role === 'creator' &&
                                     <li><a onClick={() => { navigate('/contests-created') }}>My Created Contests</a></li>
                             }
                             {
-                                user && roleInfo.role === 'user' &&
+                                user && !roleInfo.roleLoading && roleInfo.role === 'user' &&
                                     <li><a onClick={() => { navigate('/contests-participated') }}>My Participated Contests</a></li>
                             }
                             {
-                                user && roleInfo.role === 'admin' &&
+                                user && !roleInfo.roleLoading && roleInfo.role === 'admin' &&
                                     <li><a onClick={() => { navigate('/dashboard') }}>Dashboard</a></li>
                             }
                             <li><a onClick={handleClick}>Logout</a></li>

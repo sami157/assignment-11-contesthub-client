@@ -1,10 +1,50 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuth from "../hooks/useAuth";
+import { BsFillPatchQuestionFill } from "react-icons/bs";
+import toast from "react-hot-toast";
+import { HiEye } from "react-icons/hi";
+import { FiEdit } from "react-icons/fi";
+import { MdDeleteForever } from "react-icons/md";
+import { useState } from "react";
+import EditContestModal from "../components/EditContestModal";
 
 const ContestsCreated = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
+    const queryClient = useQueryClient();
+    const [selectedContest, setSelectedContest] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Delete contest
+    const handleDelete = async (contestId) => {
+        const confirmDelete = window.confirm(
+            "Are you sure you want to delete this contest?"
+        );
+        if (!confirmDelete) return;
+
+        try {
+            await toast.promise(
+                axiosSecure.delete(`/contests/delete/${contestId}`),
+                {
+                    loading: "Deleting contest...",
+                    success: "Contest deleted successfully",
+                    error: "Failed to delete contest",
+                }
+            );
+
+            queryClient.invalidateQueries(["creatorContests"]);
+        } catch (error) {
+            console.error("Delete error:", error);
+        }
+    };
+
+    
+    const handleUpdate = async (contestId, updatedData) => {
+        const res = await axiosSecure.put(`/contests/update/${contestId}`, updatedData);
+        queryClient.invalidateQueries(["creatorContests"]);
+        return res;
+    };
 
     const {
         data: contests = [],
@@ -32,42 +72,68 @@ const ContestsCreated = () => {
     }
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {contests.map((contest) => (
-                <div key={contest._id} className="card bg-base-100 shadow-md">
-                    <figure>
-                        <img
-                            src={contest.image}
-                            alt={contest.name}
-                            className="h-48 w-full object-cover"
-                        />
-                    </figure>
+        <div className="overflow-x-auto">
+            <table className="table w-full">
+                <thead>
+                    <tr>
+                        <th className="text-center">Sl</th>
+                        <th>Name</th>
+                        <th className="text-center">Type</th>
+                        <th className="text-center">Price</th>
+                        <th className="text-center">Prize</th>
+                        <th className="text-center">Status</th>
+                        <th className="text-center">Deadline</th>
+                        <th className="text-center">Actions</th>
+                    </tr>
+                </thead>
 
-                    <div className="card-body">
-                        <h2 className="card-title">{contest.name}</h2>
+                <tbody>
+                    {contests.map((contest, index) => (
+                        <tr key={contest._id}>
+                            <th className="text-center">{index + 1}</th>
+                            <td>{contest.name}</td>
+                            <td className="text-center capitalize">{contest.contestType}</td>
+                            <td className="text-center">${contest.price}</td>
+                            <td className="text-center">${contest.prizeMoney}</td>
+                            <td className="text-center">
+                                <div
+                                    className={`flex gap-2 justify-center items-center text-warning-content capitalize`}
+                                >
+                                    <BsFillPatchQuestionFill className={`text-lg ${contest.status === 'pending' ? 'text-warning' : contest.status === 'confirmed' ? 'text-success' : 'text-error'}`} />
+                                    <div>{contest.status}</div>
+                                </div>
+                            </td>
+                            <td className="text-center">{new Date(contest.deadline).toLocaleDateString()}</td>
+                            <td className="flex text-lg gap-2 items-center justify-center">
+                                <button
+                                    onClick={() => {
+                                        setSelectedContest(contest);
+                                        setIsModalOpen(true);
+                                    }}
+                                    className="text-info hover:cursor-pointer px-2 py-1 hover:bg-base-300 rounded-lg"
+                                >
+                                    <FiEdit />
+                                </button>
+                                <button
+                                    onClick={() => handleDelete(contest._id)}
+                                    className="text-2xl text-error hover:cursor-pointer px-2 py-1 hover:bg-base-300 rounded-lg"
+                                >
+                                    <MdDeleteForever />
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 
-                        <p className="text-sm text-gray-600 line-clamp-2">
-                            {contest.description}
-                        </p>
-
-                        <div className="flex justify-between text-sm mt-2">
-                            <span>💰 Price: ${contest.price}</span>
-                            <span>🏆 Prize: ${contest.prizeMoney}</span>
-                        </div>
-
-                        <div className="mt-2">
-                            <span className="badge badge-outline capitalize">
-                                {contest.status}
-                            </span>
-                        </div>
-
-                        <div className="card-actions justify-end mt-4">
-                            <button className="btn btn-sm btn-outline">View</button>
-                            <button className="btn btn-sm btn-primary">Edit</button>
-                        </div>
-                    </div>
-                </div>
-            ))}
+            {isModalOpen && selectedContest && (
+                <EditContestModal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    contest={selectedContest}
+                    onUpdate={handleUpdate}
+                />
+            )}
         </div>
     );
 };

@@ -1,0 +1,282 @@
+[
+    {
+        "_id": {
+            "$oid": "693d1252e6b86ffd23279d95"
+        },
+        "creatorEmail": "sami.eee300@gmail.com",
+        "name": "Art of Nature",
+        "image": "https://i.ibb.co/B2d8DxFw/5.png",
+        "description": "A contest about capturing the beauty of nature.",
+        "price": 50,
+        "prizeMoney": 200,
+        "taskInstruction": "Submit your best nature-themed artwork.",
+        "contestType": "image",
+        "deadline": {
+            "$date": "2025-12-20T07:14:08.241Z"
+        },
+        "status": "pending",
+        "createdAt": {
+            "$date": "2025-12-13T07:14:26.493Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "693d1252e6b86ffd23279d96"
+        },
+        "creatorEmail": "sami.eee300@gmail.com",
+        "name": "Tech Article Challenge",
+        "image": "https://i.ibb.co/B2d8DxFw/6.png",
+        "description": "Write an insightful article on emerging tech.",
+        "price": 70,
+        "prizeMoney": 250,
+        "taskInstruction": "Submit a 1000-word article about AI.",
+        "contestType": "article",
+        "deadline": {
+            "$date": "2025-12-25T07:14:08.241Z"
+        },
+        "status": "pending",
+        "createdAt": {
+            "$date": "2025-12-13T07:14:26.493Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "693d1252e6b86ffd23279d97"
+        },
+        "creatorEmail": "jane.doe@example.com",
+        "name": "Video Marketing Contest",
+        "image": "https://i.ibb.co/B2d8DxFw/7.png",
+        "description": "Create an engaging marketing video.",
+        "price": 80,
+        "prizeMoney": 300,
+        "taskInstruction": "Video must be under 2 minutes.",
+        "contestType": "video",
+        "deadline": {
+            "$date": "2025-12-22T07:14:08.241Z"
+        },
+        "status": "pending",
+        "createdAt": {
+            "$date": "2025-12-13T07:14:26.493Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "693d1252e6b86ffd23279d98"
+        },
+        "creatorEmail": "alex.smith@example.com",
+        "name": "Logo Design Contest",
+        "image": "https://i.ibb.co/B2d8DxFw/8.png",
+        "description": "Design a creative logo for our brand.",
+        "price": 60,
+        "prizeMoney": 220,
+        "taskInstruction": "Submit vector format only.",
+        "contestType": "design",
+        "deadline": {
+            "$date": "2025-12-18T07:14:08.241Z"
+        },
+        "status": "pending",
+        "createdAt": {
+            "$date": "2025-12-13T07:14:26.493Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "693d1252e6b86ffd23279d99"
+        },
+        "creatorEmail": "sami.eee300@gmail.com",
+        "name": "Photography Contest",
+        "image": "https://i.ibb.co/B2d8DxFw/9.png",
+        "description": "Capture stunning photographs of city life.",
+        "price": 100,
+        "prizeMoney": 350,
+        "taskInstruction": "Submit up to 3 photos in JPEG format.",
+        "contestType": "image",
+        "deadline": {
+            "$date": "2025-12-21T07:14:08.241Z"
+        },
+        "status": "pending",
+        "createdAt": {
+            "$date": "2025-12-13T07:14:26.493Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "693d1252e6b86ffd23279d9a"
+        },
+        "creatorEmail": "emma.watson@example.com",
+        "name": "Creative Writing Challenge",
+        "image": "https://i.ibb.co/B2d8DxFw/10.png",
+        "description": "Write a short story based on the theme 'Hope'.",
+        "price": 40,
+        "prizeMoney": 180,
+        "taskInstruction": "Story must be between 500-800 words.",
+        "contestType": "article",
+        "deadline": {
+            "$date": "2025-12-23T07:14:08.241Z"
+        },
+        "status": "pending",
+        "createdAt": {
+            "$date": "2025-12-13T07:14:26.493Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "693d1252e6b86ffd23279d9b"
+        },
+        "creatorEmail": "john.doe@example.com",
+        "name": "Short Film Contest",
+        "image": "https://i.ibb.co/B2d8DxFw/11.png",
+        "description": "Produce a short film under 5 minutes.",
+        "price": 90,
+        "prizeMoney": 400,
+        "taskInstruction": "Video must include our logo.",
+        "contestType": "video",
+        "deadline": {
+            "$date": "2025-12-26T07:14:08.241Z"
+        },
+        "status": "pending",
+        "createdAt": {
+            "$date": "2025-12-13T07:14:26.493Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "693d1252e6b86ffd23279d9c"
+        },
+        "creatorEmail": "sara.connor@example.com",
+        "name": "UX Design Contest",
+        "image": "https://i.ibb.co/B2d8DxFw/12.png",
+        "description": "Design a mobile app interface.",
+        "price": 70,
+        "prizeMoney": 280,
+        "taskInstruction": "Include at least 3 screens.",
+        "contestType": "design",
+        "deadline": {
+            "$date": "2025-12-24T07:14:08.241Z"
+        },
+        "status": "pending",
+        "createdAt": {
+            "$date": "2025-12-13T07:14:26.493Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "693d1252e6b86ffd23279d9d"
+        },
+        "creatorEmail": "sami.eee300@gmail.com",
+        "name": "Nature Photography",
+        "image": "https://i.ibb.co/B2d8DxFw/13.png",
+        "description": "Submit photos of wildlife and landscapes.",
+        "price": 110,
+        "prizeMoney": 320,
+        "taskInstruction": "High-resolution images only.",
+        "contestType": "image",
+        "deadline": {
+            "$date": "2025-12-28T07:14:08.241Z"
+        },
+        "status": "pending",
+        "createdAt": {
+            "$date": "2025-12-13T07:14:26.493Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "693d1252e6b86ffd23279d9e"
+        },
+        "creatorEmail": "michael.scott@example.com",
+        "name": "Article Writing Challenge",
+        "image": "https://i.ibb.co/B2d8DxFw/14.png",
+        "description": "Write an article on leadership tips.",
+        "price": 50,
+        "prizeMoney": 210,
+        "taskInstruction": "At least 800 words.",
+        "contestType": "article",
+        "deadline": {
+            "$date": "2025-12-27T07:14:08.241Z"
+        },
+        "status": "pending",
+        "createdAt": {
+            "$date": "2025-12-13T07:14:26.493Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "693d1252e6b86ffd23279d9f"
+        },
+        "creatorEmail": "anna.bell@example.com",
+        "name": "Video Editing Contest",
+        "image": "https://i.ibb.co/B2d8DxFw/15.png",
+        "description": "Edit a 2-minute promotional video.",
+        "price": 60,
+        "prizeMoney": 240,
+        "taskInstruction": "Use stock footage provided.",
+        "contestType": "video",
+        "deadline": {
+            "$date": "2025-12-29T07:14:08.241Z"
+        },
+        "status": "pending",
+        "createdAt": {
+            "$date": "2025-12-13T07:14:26.493Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "693d1252e6b86ffd23279da0"
+        },
+        "creatorEmail": "sami.eee300@gmail.com",
+        "name": "Brand Logo Design",
+        "image": "https://i.ibb.co/B2d8DxFw/16.png",
+        "description": "Create a modern logo for our startup.",
+        "price": 80,
+        "prizeMoney": 300,
+        "taskInstruction": "Submit in PNG & vector formats.",
+        "contestType": "design",
+        "deadline": {
+            "$date": "2025-12-30T07:14:08.241Z"
+        },
+        "status": "pending",
+        "createdAt": {
+            "$date": "2025-12-13T07:14:26.493Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "693d1252e6b86ffd23279da1"
+        },
+        "creatorEmail": "lisa.green@example.com",
+        "name": "Creative Photo Contest",
+        "image": "https://i.ibb.co/B2d8DxFw/17.png",
+        "description": "Submit creative photos of everyday life.",
+        "price": 55,
+        "prizeMoney": 190,
+        "taskInstruction": "Maximum 3 images per participant.",
+        "contestType": "image",
+        "deadline": {
+            "$date": "2025-12-31T07:14:08.241Z"
+        },
+        "status": "pending",
+        "createdAt": {
+            "$date": "2025-12-13T07:14:26.493Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "693d1252e6b86ffd23279da2"
+        },
+        "creatorEmail": "sami.eee300@gmail.com",
+        "name": "Short Story Challenge",
+        "image": "https://i.ibb.co/B2d8DxFw/18.png",
+        "description": "Write a short story on friendship.",
+        "price": 45,
+        "prizeMoney": 170,
+        "taskInstruction": "Minimum 500 words.",
+        "contestType": "article",
+        "deadline": {
+            "$date": "2025-12-31T07:14:08.241Z"
+        },
+        "status": "pending",
+        "createdAt": {
+            "$date": "2025-12-13T07:14:26.493Z"
+        }
+    }
+]
