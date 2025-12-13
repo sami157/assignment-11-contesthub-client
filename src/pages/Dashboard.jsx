@@ -20,6 +20,16 @@ const Dashboard = () => {
         }
     });
 
+    const { data: contests = [], isLoading: contestsLoading, isError: contestsError } = useQuery({
+        queryKey: ["contests"],
+        enabled: !!user,
+        queryFn: async () => {
+            const res = await axiosSecure.get("/contests");
+            return res.data;
+        },
+    });
+
+
     const changeRole = async (name, email, role) => {
         try {
             toast.promise(
@@ -107,7 +117,42 @@ const Dashboard = () => {
                 </div>
 
                 <input type="radio" name="my_tabs_1" className="tab font-bold" aria-label="Contest Management" defaultChecked />
-                <div className="tab-content mt-2 bg-base-100 border-base-300 p-6">Contests</div>
+                <div className="tab-content mt-2 bg-base-100 border-base-300 p-6">
+                    {contestsLoading && <p>Loading contests...</p>}
+                    {contestsError && <p>Error loading contests.</p>}
+                    {contests.length > 0 ? (
+                        <div className="overflow-x-auto">
+                            <table className="table table-zebra w-full">
+                                <thead>
+                                    <tr>
+                                        <th className="text-center">Sl</th>
+                                        <th>Name</th>
+                                        <th className="text-center">Type</th>
+                                        <th className="text-center">Price</th>
+                                        <th className="text-center">Prize</th>
+                                        <th className="text-center">Status</th>
+                                        <th className="text-center">Deadline</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {contests.map((contest, index) => (
+                                        <tr key={contest._id}>
+                                            <th className="text-center">{index + 1}</th>
+                                            <td>{contest.name}</td>
+                                            <td className="text-center capitalize">{contest.contestType}</td>
+                                            <td className="text-center">${contest.price}</td>
+                                            <td className="text-center">${contest.prizeMoney}</td>
+                                            <td className="text-center capitalize">{contest.status}</td>
+                                            <td className="text-center">{new Date(contest.deadline).toLocaleDateString()}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : (
+                        <p className="text-center text-gray-500 mt-4">No contests found</p>
+                    )}
+                </div>
             </div>
         </div>
     );
