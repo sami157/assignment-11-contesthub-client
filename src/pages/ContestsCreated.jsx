@@ -16,7 +16,6 @@ const ContestsCreated = () => {
     const [selectedContest, setSelectedContest] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Delete contest
     const handleDelete = async (contestId) => {
         const confirmDelete = window.confirm(
             "Are you sure you want to delete this contest?"

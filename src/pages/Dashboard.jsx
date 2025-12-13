@@ -1,15 +1,35 @@
 import React, { useEffect } from 'react';
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import { IoPersonAdd } from "react-icons/io5";
 import { FaShield } from "react-icons/fa6";
 import { SiCkeditor4 } from "react-icons/si";
 import useAuth from '../hooks/useAuth';
+import { MdDeleteForever } from 'react-icons/md';
 
 const Dashboard = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth()
+    const queryClient = useQueryClient(); // make sure you have this
+
+    const handleStatusChange = async (contestId, newStatus) => {
+        try {
+            await toast.promise(
+                axiosSecure.put(`/contests/update-status/${contestId}`, { status: newStatus }),
+                {
+                    loading: "Updating status...",
+                    success: `Status updated to ${newStatus}`,
+                    error: "Failed to update status",
+                }
+            );
+
+            queryClient.invalidateQueries(["contests"]);
+        } catch (error) {
+            console.error("Status update error:", error);
+        }
+    };
+
 
     const { data: users = [], isLoading, isSuccess, isError, refetch } = useQuery({
         queryKey: ["users"],
@@ -49,6 +69,28 @@ const Dashboard = () => {
             toast.error(error.message)
         }
     }
+
+    const handleDelete = async (contestId) => {
+        const confirmDelete = window.confirm(
+            "Are you sure you want to delete this contest?"
+        );
+        if (!confirmDelete) return;
+
+        try {
+            await toast.promise(
+                axiosSecure.delete(`/contests/delete/${contestId}`),
+                {
+                    loading: "Deleting contest...",
+                    success: "Contest deleted successfully",
+                    error: "Failed to delete contest",
+                }
+            );
+
+            queryClient.invalidateQueries(["creatorContests"]);
+        } catch (error) {
+            console.error("Delete error:", error);
+        }
+    };
 
     useEffect(() => {
         if (isLoading) {
@@ -130,8 +172,8 @@ const Dashboard = () => {
                                         <th className="text-center">Type</th>
                                         <th className="text-center">Price</th>
                                         <th className="text-center">Prize</th>
-                                        <th className="text-center">Status</th>
                                         <th className="text-center">Deadline</th>
+                                        <th className="text-center">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -142,8 +184,25 @@ const Dashboard = () => {
                                             <td className="text-center capitalize">{contest.contestType}</td>
                                             <td className="text-center">${contest.price}</td>
                                             <td className="text-center">${contest.prizeMoney}</td>
-                                            <td className="text-center capitalize">{contest.status}</td>
                                             <td className="text-center">{new Date(contest.deadline).toLocaleDateString()}</td>
+                                            <td className="text-center">
+                                                <div className="flex gap-3 items-center justify-center">
+                                                    <select
+                                                        className={`select font-bold select-bordered select-sm w-full max-w-xs 
+        ${contest.status === "pending" ? "text-warning-content" : ""} 
+        ${contest.status === "confirmed" ? "text-success-content" : ""} 
+        ${contest.status === "rejected" ? "text-error" : ""}`}
+                                                        value={contest.status}
+                                                        onChange={(e) => handleStatusChange(contest._id, e.target.value)}
+                                                    >
+                                                        <option value="pending">Pending</option>
+                                                        <option value="confirmed">Confirmed</option>
+                                                        <option value="rejected">Rejected</option>
+                                                    </select>
+                                                    <MdDeleteForever onClick={()=>handleDelete(contest._id)} className="hover:cursor-pointer text-error text-3xl" />
+                                                </div>
+                                            </td>
+
                                         </tr>
                                     ))}
                                 </tbody>
