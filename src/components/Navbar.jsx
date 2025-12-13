@@ -50,7 +50,18 @@ export default function Navbar() {
                                 user && roleInfo.role === 'creator' &&
                                     <li><a onClick={() => { navigate('/add-contest') }}>Add Contest</a></li>
                             }
-                            <li><a onClick={() => {navigate('/dashboard')}}>Dashboard</a></li>
+                            {
+                                user && roleInfo.role === 'creator' &&
+                                    <li><a onClick={() => { navigate('/contests-created') }}>My Created Contests</a></li>
+                            }
+                            {
+                                user && roleInfo.role === 'user' &&
+                                    <li><a onClick={() => { navigate('/contests-participated') }}>My Participated Contests</a></li>
+                            }
+                            {
+                                user && roleInfo.role === 'admin' &&
+                                    <li><a onClick={() => { navigate('/dashboard') }}>Dashboard</a></li>
+                            }
                             <li><a onClick={handleClick}>Logout</a></li>
                         </ul>
                     </div> : <NavLink className='hover:bg-white/40 rounded-lg px-3 py-2' to='/login'>Login</NavLink>

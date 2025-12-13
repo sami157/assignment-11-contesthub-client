@@ -7,6 +7,10 @@ import NotFound from "../components/NotFound";
 import Dashboard from "../pages/Dashboard";
 import AddContest from "../pages/AddContest";
 import CreatorRoute from "../pages/CreatorRoute";
+import ContestsCreated from "../pages/ContestsCreated";
+import PrivateRoute from "../pages/PrivateRoute";
+import ContestsParticipated from "../pages/ContestsParticipated";
+import AdminRoute from "../pages/AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -27,7 +31,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard',
-                Component: Dashboard
+                element: <AdminRoute><Dashboard/></AdminRoute>
             },
             {
                 path: "*",
@@ -36,6 +40,14 @@ export const router = createBrowserRouter([
             {
                 path: '/add-contest',
                 element: <CreatorRoute><AddContest/></CreatorRoute>
+            },
+            {
+                path: '/contests-created',
+                element: <CreatorRoute><ContestsCreated /></CreatorRoute>
+            },
+            {
+                path: '/contests-participated',
+                element: <PrivateRoute><ContestsParticipated/></PrivateRoute>
             }
         ]
     },

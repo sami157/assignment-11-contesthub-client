@@ -3,16 +3,16 @@ import useAuth from '../hooks/useAuth';
 import useRole from '../hooks/useRole';
 
 const CreatorRoute = ({children}) => {
-    const { loading, user } = useAuth()
+    const { user } = useAuth()
     const roleObject = useRole()
     return (
         <div>
             {
                 user && roleObject.role === 'creator' 
-                    ? loading ? <p>Loading</p> : loading
-                        ? <p>Loading</p>
+                    ? roleObject.roleLoading ? <p>Loading</p>
                         : children
-                : <Forbidden/>
+                    : roleObject.roleLoading ? <p>Loading</p>
+                        : <Forbidden />
             }
         </div>
     );

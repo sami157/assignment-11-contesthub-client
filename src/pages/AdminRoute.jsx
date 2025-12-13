@@ -3,16 +3,16 @@ import useAuth from '../hooks/useAuth';
 import useRole from '../hooks/useRole';
 
 const AdminRoute = ({ children }) => {
-    const { loading, user} = useAuth()
-    const roleInfo = useRole()
+    const { user} = useAuth()
+    const roleObject = useRole()
     return (
         <div>
             {
-                user && roleInfo.role === 'admin'
-                    ? loading ? <p>Loading</p> : loading
-                        ? <p>Loading</p>
+                user && roleObject.role === 'admin'
+                    ? roleObject.roleLoading ? <p>Loading</p>
                         : children
-                    : <Forbidden />
+                    : roleObject.roleLoading ? <p>Loading</p>
+                        : <Forbidden />
             }
         </div>
     );

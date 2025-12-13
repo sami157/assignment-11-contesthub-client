@@ -9,7 +9,7 @@ import useAuth from '../hooks/useAuth';
 
 const Dashboard = () => {
     const axiosSecure = useAxiosSecure();
-    const {user} = useAuth()
+    const { user } = useAuth()
 
     const { data: users = [], isLoading, isSuccess, isError, refetch } = useQuery({
         queryKey: ["users"],
@@ -20,7 +20,7 @@ const Dashboard = () => {
         }
     });
 
-    const changeRole = async(name, email, role) => {
+    const changeRole = async (name, email, role) => {
         try {
             toast.promise(
                 async () => {
@@ -39,7 +39,7 @@ const Dashboard = () => {
             toast.error(error.message)
         }
     }
-    
+
     useEffect(() => {
         if (isLoading) {
             toast.loading("Loading user list", { id: "users-toast" });
@@ -80,7 +80,7 @@ const Dashboard = () => {
                                                 <td>{user.role}</td>
                                                 <td>
                                                     <div className="flex items-center text-gray-400">
-                                                        <div onClick= {() => changeRole(user.name, user.email, 'user')} className={`p-2 ${user.role !== 'user' ? 'hover:bg-primary/15' : 'hover:none'}  rounded-lg`}>
+                                                        <div onClick={() => changeRole(user.name, user.email, 'user')} className={`p-2 ${user.role !== 'user' ? 'hover:bg-primary/15' : 'hover:none'}  rounded-lg`}>
                                                             <IoPersonAdd
                                                                 className={`text-xl ${user.role === "user" ? "text-black" : "text-gray-400"}`}
                                                             />

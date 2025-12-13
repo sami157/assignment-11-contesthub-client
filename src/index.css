@@ -37,11 +37,66 @@
   --noise: 1;
 }
 
+/* Calendar container */
+.react-datepicker {
+  border-radius: 12px;
+  padding: 4px;
+  font-family: inherit;
+}
+
+/* Header */
+.react-datepicker__header {
+  color: white;
+  background-color: oklch(42.551% 0.161 282.339);
+  border-radius: 8px;
+}
+
+/* Month text */
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  color: white;
+}
+
+/* Day cells */
+.react-datepicker__day {
+  border-radius: 6px;
+}
+
+/* Selected day */
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: oklch(42.551% 0.161 282.339);
+}
+
+/* Today */
+.react-datepicker__day--today {
+  font-weight: 700;
+  color: oklch(42.551% 0.161 282.339);
+}
+
 
 .title-font {
   font-family: "Zalando Sans Expanded", sans-serif;
   font-optical-sizing: auto;
   font-weight: 100;
+}
+
+/* Arrow button base */
+.react-datepicker__navigation {
+  top: 10px;
+  line-height: 1.5;
+}
+
+/* Previous arrow */
+.react-datepicker__navigation--previous {
+  border-right-color: transparent;
+  left: 12px;
+}
+
+/* Next arrow */
+.react-datepicker__navigation--next {
+  border-left-color: transparent;
+  right: 12px;
 }
 
 * {
