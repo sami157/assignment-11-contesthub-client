@@ -98,7 +98,7 @@ const ContestsCreated = () => {
                                 <div
                                     className={`flex gap-2 justify-center items-center text-warning-content capitalize`}
                                 >
-                                    <BsFillPatchQuestionFill className={`text-lg ${contest.status === 'pending' ? 'text-warning' : contest.status === 'confirmed' ? 'text-success' : 'text-error'}`} />
+                                    <BsFillPatchQuestionFill className={`text-lg ${contest.status === 'pending' ? 'text-warning-content' : contest.status === 'confirmed' ? 'text-success-content' : 'text-error'}`} />
                                     <div>{contest.status}</div>
                                 </div>
                             </td>
@@ -113,12 +113,18 @@ const ContestsCreated = () => {
                                 >
                                     <FiEdit />
                                 </button>
-                                <button
-                                    onClick={() => handleDelete(contest._id)}
-                                    className="text-2xl text-error hover:cursor-pointer px-2 py-1 hover:bg-base-300 rounded-lg"
-                                >
-                                    <MdDeleteForever />
-                                </button>
+                                {
+                                    contest.status === 'pending' ? <button
+                                        onClick={() => handleDelete(contest._id)}
+                                        className="text-2xl text-error hover:cursor-pointer px-2 py-1 hover:bg-base-300 rounded-lg"
+                                    >
+                                        <MdDeleteForever />
+                                    </button> : <button
+                                        className="text-2xl text-error hover:cursor-not-allowed px-2 py-1 rounded-lg"
+                                    >
+                                        <MdDeleteForever className="text-gray-400" />
+                                    </button>
+                                }
                             </td>
                         </tr>
                     ))}
