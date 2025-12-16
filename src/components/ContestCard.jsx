@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 
 const ContestCard = ({ contest }) => {
+    const navigate = useNavigate()
     return (
-        <div className="bg-base-200 p-3 rounded-2xl hover:scale-105 duration-250 ease-in-out flex flex-col h-full">
+        <div onClick={() => navigate(`/details/${contest._id}`)} className="bg-base-200 p-3 rounded-2xl hover:scale-105 duration-250 ease-in-out flex flex-col h-full">
             <img
                 src={contest.image}
                 alt={contest.name}

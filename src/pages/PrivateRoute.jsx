@@ -1,19 +1,27 @@
-import Forbidden from '../components/error/Forbidden';
-import useAuth from '../hooks/useAuth';
+import Forbidden from "../components/error/Forbidden";
+import useAuth from "../hooks/useAuth";
+import useRole from "../hooks/useRole";
 
-const PrivateRoute = ({ children }) => {
-    const { loading, user } = useAuth()
-    return (
-        <div>
-            {
-                user && user === 'creator'
-                    ? loading ? <p>Loading</p> : loading
-                        ? <p>Loading</p>
-                        : children
-                    : <Forbidden />
-            }
-        </div>
-    );
+const PrivateRoute = ({ role, children }) => {
+    const { user, loading } = useAuth();
+    const { role: userRole, roleLoading } = useRole();
+
+    if (loading || roleLoading) {
+        return <p className="text-center">Loading...</p>;
+    }
+
+    if (!user) {
+        return <Forbidden />;
+    }
+
+    const allowedRoles = Array.isArray(role) ? role : [role];
+
+
+    if (!allowedRoles.includes(userRole)) {
+        return <Forbidden />;
+    }
+
+    return children;
 };
 
 export default PrivateRoute;
