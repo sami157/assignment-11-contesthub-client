@@ -11,7 +11,12 @@ const ContestDetails = () => {
     const { user } = useAuth();
 
     const [ended, setEnded] = useState(false);
-    const [timeLeft, setTimeLeft] = useState({});
+    const [timeLeft, setTimeLeft] = useState({
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0
+    });
 
     const { data: contest, isLoading, isError } = useQuery({
         queryKey: ["contest-details", id],
@@ -61,40 +66,42 @@ const ContestDetails = () => {
     if (isError) return <p className="text-center text-error">Failed to load contest</p>;
     return (
         <div className="max-w-5xl mx-auto px-4 py-8 space-y-6">
-            {
-                !ended &&
-                <div className="flex justify-between items-center">
-                    <h1 className="title-font text-4xl font-bold">{contest.name}</h1>
+
+            <div className="flex justify-between items-center">
+                <h1 className="title-font text-4xl font-bold">{contest.name}</h1>
+                {
+                    !ended &&
                     <div>
                         <div className="grid grid-flow-col gap-5 text-center auto-cols-max">
                             <div className="flex font-bold rounded-xl flex-col p-2 bg-neutral text-neutral-content">
                                 <span className="countdown font-mono text-5xl">
-                                    <span style={{ "--value": timeLeft.days }}></span>
+                                    <span style={{ "--value": timeLeft.days }}>{timeLeft.days}</span>
                                 </span>
                                 days
                             </div>
                             <div className="flex font-bold rounded-xl flex-col p-2 bg-neutral text-neutral-content">
                                 <span className="countdown font-mono text-5xl">
-                                    <span style={{ "--value": timeLeft.hours }}></span>
+                                    <span style={{ "--value": timeLeft.hours }}>{timeLeft.hours}</span>
                                 </span>
                                 hours
                             </div>
                             <div className="flex font-bold rounded-xl flex-col p-2 bg-neutral text-neutral-content">
                                 <span className="countdown font-mono text-5xl">
-                                    <span style={{ "--value": timeLeft.minutes }}></span>
+                                    <span style={{ "--value": timeLeft.minutes }}>{timeLeft.minutes}</span>
                                 </span>
                                 min
                             </div>
                             <div className="flex font-bold rounded-xl flex-col p-2 bg-neutral text-neutral-content">
                                 <span className="countdown font-mono text-5xl">
-                                    <span style={{ "--value": timeLeft.seconds }}></span>
+                                    <span style={{ "--value": timeLeft.seconds }}>{timeLeft.seconds}</span>
                                 </span>
                                 sec
                             </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
+
 
 
             <img
