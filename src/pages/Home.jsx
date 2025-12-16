@@ -1,4 +1,5 @@
 import React from 'react'
+import PopularContests from '../components/PopularContests'
 
 export default function Home() {
     return (
@@ -8,17 +9,7 @@ export default function Home() {
                 {/* Search works by contest types (search logic in backend). Make this section look unique and attractive */}
             </div>
             <div>
-                Popular Contests Section
-                {/* (show at least 5)
-                ○	Sorted by highest participation count
-                ○	For each contest show:
-                • Contest Name
-                • Creative image/card design
-                • Participants count
-                • Short description (use slice + “…”)
-                • Details button → goes to contest details page
-                ○	If not logged in → clicking Details sends user to Login page
-                ○	“Show All” button → goes to All Contests page */}
+                <PopularContests/>
 
             </div>
             <div>
