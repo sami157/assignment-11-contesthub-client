@@ -44,7 +44,7 @@ const Dashboard = () => {
         queryKey: ["contests"],
         enabled: !!user,
         queryFn: async () => {
-            const res = await axiosSecure.get("/contests");
+            const res = await axiosSecure.get("/contests/all");
             return res.data;
         },
     });

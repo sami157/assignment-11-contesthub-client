@@ -2,7 +2,7 @@ import React from 'react';
 
 const ContestCard = ({ contest }) => {
     return (
-        <div className="bg-base-200 p-3 rounded-2xl flex flex-col h-full">
+        <div className="bg-base-200 p-3 rounded-2xl hover:scale-105 duration-250 ease-in-out flex flex-col h-full">
             <img
                 src={contest.image}
                 alt={contest.name}
@@ -15,20 +15,22 @@ const ContestCard = ({ contest }) => {
                     {contest.description}
                 </p>
 
-                <div className="flex justify-between text-sm mt-2">
-                    <span>Price: ${contest.price}</span>
-                    <span>Prize: ${contest.prizeMoney}</span>
-                </div>
+                <div className='mt-auto flex flex-col gap-3'>
+                    <div className="flex justify-between text-sm mt-2">
+                        <span>Price: ${contest.price}</span>
+                        <span>Prize: ${contest.prizeMoney}</span>
+                    </div>
 
-                <div className="mt-2">
-                    <span className="badge badge-outline capitalize">
-                        {contest.status}
-                    </span>
-                </div>
-                <div className="mt-auto">
-                    <button className="w-full bg-white px-4 py-2 rounded-lg drop-shadow-sm font-bold text-primary">
-                        Details
-                    </button>
+                    <div>
+                        <span className="badge badge-outline capitalize">
+                            {contest.status}
+                        </span>
+                    </div>
+                    <div>
+                        <button className="w-full bg-white px-4 py-2 rounded-lg drop-shadow-sm font-bold text-primary">
+                            Details
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
