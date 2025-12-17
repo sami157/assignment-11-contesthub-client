@@ -54,18 +54,30 @@ const ContestDetails = () => {
 
     if (!contest) return;
 
-    const handleRegister = () => {
+    const handleRegister = async () => {
         if (!user) {
             navigate("/login");
             return;
         }
-        //Stripe Payment
+
+        try {
+            const res = await axiosSecure.post("/payments/create-payment-session", {
+                contestId: contest._id,
+                name: contest.name,
+                price: contest.price,
+            });
+            window.location.href = res.data.url;
+            console.log(res.data.url);
+        } catch (error) {
+            console.error("Payment error:", error);
+        }
     };
+
 
     if (isLoading) return <p className="text-center">Loading contest...</p>;
     if (isError) return <p className="text-center text-error">Failed to load contest</p>;
     return (
-        <div className="max-w-5xl mx-auto px-4 py-8 space-y-6">
+        <div className="max-w-5xl mx-auto px-4 py-8 space-y-6 min-h-screen">
 
             <div className="flex justify-between items-center">
                 <h1 className="title-font text-4xl font-bold">{contest.name}</h1>
