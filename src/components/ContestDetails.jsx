@@ -67,7 +67,6 @@ const ContestDetails = () => {
                 price: contest.price,
             });
             window.location.href = res.data.url;
-            console.log(res.data.url);
         } catch (error) {
             console.error("Payment error:", error);
         }
@@ -80,7 +79,17 @@ const ContestDetails = () => {
         <div className="max-w-5xl mx-auto px-4 py-8 space-y-6 min-h-screen">
 
             <div className="flex justify-between items-center">
-                <h1 className="title-font text-4xl font-bold">{contest.name}</h1>
+                <div className="flex flex-col gap-4">
+                    <h1 className="title-font text-4xl font-bold">{contest.name}</h1>
+                    <div className="flex items-center gap-4 text-sm text-gray-600">
+                        <span className="badge badge-primary badge-outline">
+                            Participants: {contest.participantCount || 0}
+                        </span>
+                        <span className="badge badge-primary badge-outline">
+                            Price: {contest?.price}
+                        </span>
+                    </div>
+                </div>
                 {
                     !ended &&
                     <div>
@@ -113,8 +122,6 @@ const ContestDetails = () => {
                     </div>
                 }
             </div>
-
-
 
             <img
                 src={contest.image}

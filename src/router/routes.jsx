@@ -13,6 +13,7 @@ import ContestsParticipated from "../pages/ContestsParticipated";
 import AdminRoute from "../pages/AdminRoute";
 import AllContests from "../pages/AllContests";
 import ContestDetails from "../components/ContestDetails";
+import PaymentSuccess from "../pages/PaymentSuccess";
 
 export const router = createBrowserRouter([
     {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
             {
                 path: '/details/:id',
                 element: <PrivateRoute role = {['user', 'admin', 'creator']}><ContestDetails/></PrivateRoute>
+            },
+            {
+                path: "/payment-success",
+                element: <PrivateRoute role={['user', 'admin', 'creator']}><PaymentSuccess/></PrivateRoute>
             }
         ]
     },

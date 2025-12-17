@@ -21,7 +21,6 @@ const PopularContests = () => {
 
     return (
         <section className="max-w-7xl mx-auto px-4 my-16">
-            {console.log(contests)}
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold">Popular Contests</h2>
                 <button
