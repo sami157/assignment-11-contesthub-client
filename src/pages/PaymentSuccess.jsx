@@ -20,15 +20,10 @@ const PaymentSuccess = () => {
         const verifyPayment = async () => {
             try {
                 const res = await axiosSecure.get(
-                    `/payments/success/${sessionId}`
+                    `/payments/success?id=${sessionId}`
                 );
 
                 toast.success(res.data.message || "Payment successful");
-
-                setTimeout(() => {
-                    navigate(-1);
-                }, 1500);
-
             } catch {
                 toast.error("Payment verification failed");
                 navigate("/");
