@@ -18,6 +18,16 @@ const ContestDetails = () => {
         seconds: 0
     });
 
+    const { data: registrationStatus, isLoading: regLoading } = useQuery({
+        queryKey: ["registration-status", id, user?.email],
+        enabled: !!user && !!id,
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/registrations/check/${id}`);
+            console.log(res.data);
+            return res.data;
+        },
+    });
+
     const { data: contest, isLoading, isError } = useQuery({
         queryKey: ["contest-details", id],
         queryFn: async () => {
@@ -159,12 +169,19 @@ const ContestDetails = () => {
 
             <div className="flex gap-4">
                 <button
-                    disabled={ended}
+                    disabled={ended || registrationStatus?.registered || regLoading}
                     onClick={handleRegister}
                     className="btn btn-primary"
                 >
-                    Register / Pay
+                    {
+                        ended
+                            ? "Contest Ended"
+                            : registrationStatus?.registered
+                                ? "Already Registered"
+                                : "Register / Pay"
+                    }
                 </button>
+
             </div>
         </div>
     );
