@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router";
+import { useSearchParams, useNavigate, NavLink } from "react-router";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import paymentSuccess from '../assets/animation/payment-success.json'
+import Lottie from "lottie-react";
 
 const PaymentSuccess = () => {
     const [searchParams] = useSearchParams();
@@ -34,13 +36,9 @@ const PaymentSuccess = () => {
     }, [searchParams, axiosSecure, navigate]);
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center">
-            <h2 className="text-2xl font-bold text-success mb-2">
-                Payment Successful 🎉
-            </h2>
-            <p className="text-gray-600">
-                Registering you to the contest...
-            </p>
+        <div className="flex flex-col items-center justify-start">
+            <Lottie className="scale-100" animationData={paymentSuccess} loop={false} />
+            <NavLink to='/' className='bg-primary font-bold px-4 py-2 text-primary-content rounded-full'>Go Home</NavLink>
         </div>
     );
 };
