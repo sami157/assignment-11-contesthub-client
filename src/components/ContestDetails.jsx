@@ -3,12 +3,17 @@ import { useParams, useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const ContestDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
+
+    const [taskLinks, setTaskLinks] = useState("");
+    const [submitLoading, setSubmitLoading] = useState(false);
+
 
     const [ended, setEnded] = useState(false);
     const [timeLeft, setTimeLeft] = useState({
@@ -18,12 +23,40 @@ const ContestDetails = () => {
         seconds: 0
     });
 
+    const handleTaskSubmit = async () => {
+        if (!taskLinks.trim()) {
+            toast.error("Please enter your submission");
+            return;
+        }
+
+        try {
+            setSubmitLoading(true);
+
+            await axiosSecure.post(`/contests/submit-task/${id}`, {
+                submission: taskLinks,
+            });
+
+            toast.success("Task submitted successfully");
+            setTaskLinks("");
+            document.getElementById("submit_task_modal").close();
+
+        } catch (error) {
+            console.error(error);
+            toast.error(
+                error?.response?.data?.message || "Submission failed"
+            );
+        } finally {
+            setSubmitLoading(false);
+        }
+    };
+
+
+
     const { data: registrationStatus, isLoading: regLoading } = useQuery({
         queryKey: ["registration-status", id, user?.email],
         enabled: !!user && !!id,
         queryFn: async () => {
             const res = await axiosSecure.get(`/registrations/check/${id}`);
-            console.log(res.data);
             return res.data;
         },
     });
@@ -168,22 +201,58 @@ const ContestDetails = () => {
             )}
 
             <div className="flex gap-4">
-                <button
-                    disabled={ended || registrationStatus?.registered || regLoading}
-                    onClick={handleRegister}
-                    className="btn btn-primary"
-                >
-                    {
-                        ended
-                            ? "Contest Ended"
-                            : registrationStatus?.registered
-                                ? "Already Registered"
-                                : "Register / Pay"
-                    }
-                </button>
-
+                {!registrationStatus?.registered && (
+                    <button
+                        disabled={ended || regLoading}
+                        onClick={handleRegister}
+                        className="btn btn-primary"
+                    >
+                        {ended ? "Contest Ended" : "Register / Pay"}
+                    </button>
+                )}
             </div>
-        </div>
+            <dialog id="submit_task_modal" className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">Submit Your Task</h3>
+
+                    <p className="py-2 text-sm text-gray-500">
+                        Provide necessary links (GitHub, Drive, live URL, etc.)
+                    </p>
+
+                    <textarea
+                        className="textarea textarea-bordered w-full min-h-[120px]"
+                        placeholder="Paste your submission links here..."
+                        value={taskLinks}
+                        onChange={(e) => setTaskLinks(e.target.value)}
+                    />
+
+                    <div className="modal-action">
+                        <form method="dialog">
+                            <button className="btn btn-ghost">Cancel</button>
+                        </form>
+
+                        <button
+                            className="btn btn-primary"
+                            disabled={submitLoading || !taskLinks.trim()}
+                            onClick={handleTaskSubmit}
+                        >
+                            {submitLoading ? "Submitting..." : "Submit"}
+                        </button>
+                    </div>
+                </div>
+            </dialog>
+
+            {registrationStatus?.registered && !ended && (
+                <button
+                    className="btn btn-success"
+                    onClick={() =>
+                        document.getElementById("submit_task_modal").showModal()
+                    }
+                >
+                    Submit Task
+                </button>
+            )}
+        </div >
     );
 };
 
