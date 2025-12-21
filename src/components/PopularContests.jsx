@@ -24,7 +24,7 @@ const PopularContests = () => {
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold">Popular Contests</h2>
                 <button
-                    onClick={() => navigate("/contests")}
+                    onClick={() => navigate("/all-contests")}
                     className="btn btn-sm"
                 >
                     Show All
@@ -33,7 +33,7 @@ const PopularContests = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
                 {contests.map((contest) => (
-                    <ContestCard
+                    <ContestCard data-aos="fade"
                         key={contest._id}
                         contest={contest}
                     />

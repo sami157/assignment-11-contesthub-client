@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router";
 import Forbidden from "../components/error/Forbidden";
 import useAuth from "../hooks/useAuth";
 import useRole from "../hooks/useRole";
 
 const PrivateRoute = ({ role, children }) => {
+    const navigate = useNavigate()
     const { user, loading } = useAuth();
     const { role: userRole, roleLoading } = useRole();
 
@@ -11,7 +13,7 @@ const PrivateRoute = ({ role, children }) => {
     }
 
     if (!user) {
-        return <Forbidden />;
+        navigate('/login')
     }
 
     const allowedRoles = Array.isArray(role) ? role : [role];

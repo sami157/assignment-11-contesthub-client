@@ -3,14 +3,16 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuth from "../hooks/useAuth";
 import { BsFillPatchQuestionFill } from "react-icons/bs";
 import toast from "react-hot-toast";
-import { HiEye } from "react-icons/hi";
 import { FiEdit } from "react-icons/fi";
 import { MdDeleteForever } from "react-icons/md";
 import { useState } from "react";
 import EditContestModal from "../components/EditContestModal";
+import { FaMagnifyingGlassArrowRight } from "react-icons/fa6";
+import { useNavigate } from "react-router";
 
 const ContestsCreated = () => {
     const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate()
     const { user } = useAuth();
     const queryClient = useQueryClient();
     const [selectedContest, setSelectedContest] = useState(null);
@@ -109,7 +111,7 @@ const ContestsCreated = () => {
                                         setSelectedContest(contest);
                                         setIsModalOpen(true);
                                     }}
-                                    className="text-info hover:cursor-pointer px-2 py-1 hover:bg-base-300 rounded-lg"
+                                    className="text-info tooltip hover:cursor-pointer px-2 py-1 hover:bg-base-300 rounded-lg" data-tip='Edit'
                                 >
                                     <FiEdit />
                                 </button>
@@ -125,6 +127,9 @@ const ContestsCreated = () => {
                                         <MdDeleteForever className="text-gray-400" />
                                     </button>
                                 }
+                                <button className="tooltip" data-tip='See submissions'>
+                                    <FaMagnifyingGlassArrowRight onClick={() => {navigate('/submissions')}} className="hover:cursor-pointer" />
+                                </button>
                             </td>
                         </tr>
                     ))}

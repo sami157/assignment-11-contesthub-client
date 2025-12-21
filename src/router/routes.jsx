@@ -14,6 +14,9 @@ import AdminRoute from "../pages/AdminRoute";
 import AllContests from "../pages/AllContests";
 import ContestDetails from "../components/ContestDetails";
 import PaymentSuccess from "../pages/PaymentSuccess";
+import Submissions from "../pages/Submissions";
+import UserDashboard from "../pages/UserDashboard";
+import Leaderboard from "../pages/LeaderBoard";
 
 export const router = createBrowserRouter([
     {
@@ -63,6 +66,18 @@ export const router = createBrowserRouter([
             {
                 path: "/payment-success",
                 element: <PrivateRoute role={['user', 'admin', 'creator']}><PaymentSuccess/></PrivateRoute>
+            },
+            {
+                path: "/submissions",
+                element: <PrivateRoute role = 'creator'><Submissions/></PrivateRoute>
+            },
+            {
+                path: "/dashboard-user",
+                element: <PrivateRoute role='user'><UserDashboard/></PrivateRoute>
+            },
+            {
+                path: 'leaderboard',
+                element: <Leaderboard/>
             }
         ]
     },

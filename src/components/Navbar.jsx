@@ -4,6 +4,7 @@ import logo from '../assets/logo.png'
 import useAuth from '../hooks/useAuth'
 import toast from 'react-hot-toast'
 import useRole from '../hooks/useRole'
+import ThemeToggle from './ThemeToggle'
 
 export default function Navbar() {
     const {user, signOutUser} = useAuth()
@@ -35,14 +36,16 @@ export default function Navbar() {
                     <div className=' text-[30px] font-extrabold'>Hub</div>
                 </div>
             </Link>
+
             <div className='flex items-center gap-6 text-[16px] font-bold'>
+                <ThemeToggle/>
                 <NavLink className='hover:bg-white/40 rounded-xl px-3 py-2' to='/'>Home</NavLink>
                 <NavLink className='hover:bg-white/40 rounded-xl px-3 py-2' to='/all-contests'>All Contests</NavLink>
-                <NavLink className='hover:bg-white/40 rounded-xl px-3 py-2' to='/extra'>Extra</NavLink>
+                <NavLink className='hover:bg-white/40 rounded-xl px-3 py-2' to='/leaderboard'>Leaderboard</NavLink>
                 {
                     user ? <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn m-1 bg-white/0 border-0">
-                            <img className='w-13 h-13 object-cover rounded-full' src={user.photoURL || 'https://cdn-icons-png.flaticon.com/512/1/1247.png' } alt="" />
+                        <div tabIndex={0} role="button" className="btn m-1 bg-white py-8 rounded-full border-0">
+                            <img className='w-12 h-12 rounded-full' src={user.photoURL || 'https://cdn-icons-png.flaticon.com/512/1/1247.png' } alt="" />
                         </div>
                         <ul tabIndex="-1" className="dropdown-content menu bg-base-200 rounded-xl z-1 w-52 shadow-sm">
                             <li className='px-3 py-2'>{user.displayName}</li>
@@ -61,6 +64,10 @@ export default function Navbar() {
                             {
                                 user && !roleInfo.roleLoading && roleInfo.role === 'admin' &&
                                     <li><a onClick={() => { navigate('/dashboard') }}>Dashboard</a></li>
+                            }
+                            {
+                                user && !roleInfo.roleLoading && roleInfo.role === 'user' &&
+                                <li><a onClick={() => { navigate('/dashboard-user') }}>Dashboard</a></li>
                             }
                             <li><a onClick={handleClick}>Logout</a></li>
                         </ul>
