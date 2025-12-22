@@ -12,7 +12,9 @@ const ContestCard = ({ contest }) => {
             />
             <div className="flex flex-col gap-2 flex-1 mt-3">
                 <h2 className="card-title">{contest.name}</h2>
-
+                <span className="">
+                    Deadline: {contest.deadline.slice(0, 10)}
+                </span>
                 <p className="text-sm text-base-content line-clamp-2">
                     {contest.description}
                 </p>
@@ -26,9 +28,6 @@ const ContestCard = ({ contest }) => {
                     <div>
                         <span className="badge badge-outline capitalize">
                             Participants: {contest.participantCount}
-                        </span>
-                        <span className="ml-2 badge badge-outline capitalize">
-                            Deadline: {contest.deadline.slice(0,10)}
                         </span>
                     </div>
                     <div>

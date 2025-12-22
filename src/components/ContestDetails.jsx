@@ -59,6 +59,8 @@ const ContestDetails = () => {
         },
     });
 
+    console.log(contest?.image);
+
     useEffect(() => {
         if (!contest) return;
         const interval = setInterval(() => {
