@@ -19,13 +19,13 @@ const ContestCard = ({ contest }) => {
 
                 <div className='mt-auto flex flex-col gap-3'>
                     <div className="flex justify-between text-sm mt-2">
-                        <span>Price: ${contest.price}</span>
+                        <span>Registration: ${contest.price}</span>
                         <span>Prize: ${contest.prizeMoney}</span>
                     </div>
 
                     <div>
                         <span className="badge badge-outline capitalize">
-                            {contest.status}
+                            Participants: {contest.participantCount}
                         </span>
                     </div>
                     <div>

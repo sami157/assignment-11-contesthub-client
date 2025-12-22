@@ -57,23 +57,23 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/contests-participated',
-                element: <PrivateRoute role={['user']}><ContestsParticipated/></PrivateRoute>
+                element: <PrivateRoute><ContestsParticipated/></PrivateRoute>
             },
             {
                 path: '/details/:id',
-                element: <PrivateRoute role = {['user', 'admin', 'creator']}><ContestDetails/></PrivateRoute>
+                element: <PrivateRoute><ContestDetails/></PrivateRoute>
             },
             {
                 path: "/payment-success",
-                element: <PrivateRoute role={['user', 'admin', 'creator']}><PaymentSuccess/></PrivateRoute>
+                element: <PrivateRoute><PaymentSuccess/></PrivateRoute>
             },
             {
                 path: "/submissions",
-                element: <PrivateRoute role = 'creator'><Submissions/></PrivateRoute>
+                element: <CreatorRoute><Submissions/></CreatorRoute>
             },
             {
                 path: "/dashboard-user",
-                element: <PrivateRoute role='user'><UserDashboard/></PrivateRoute>
+                element: <PrivateRoute><UserDashboard/></PrivateRoute>
             },
             {
                 path: 'leaderboard',

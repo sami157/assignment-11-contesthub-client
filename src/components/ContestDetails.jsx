@@ -114,12 +114,12 @@ const ContestDetails = () => {
         }
     };
 
-
-    if (isLoading) return <Loading/>
     if (isError) return <p className="text-center text-error">Failed to load contest</p>;
     return (
         <div className="max-w-5xl mx-auto px-4 py-8 space-y-6 min-h-screen">
-
+            {
+                isLoading && <Loading/>
+            }
             <div className="flex justify-between items-center">
                 <div className="flex flex-col gap-4">
                     <h1 className="title-font text-4xl font-bold">{contest.name}</h1>
@@ -189,11 +189,6 @@ const ContestDetails = () => {
                 <div className="border rounded-lg p-4 bg-base-200">
                     <h2 className="text-xl font-semibold mb-2">Winner</h2>
                     <div className="flex items-center gap-4">
-                        <img
-                            src={contest.winner.photo}
-                            alt={contest.winner.name}
-                            className="w-16 h-16 rounded-full"
-                        />
                         <span className="font-bold">{contest.winner.name}</span>
                     </div>
                 </div>

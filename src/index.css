@@ -146,11 +146,11 @@
 }
 
 
-.title-font {
+/* .title-font {
   font-family: "Zalando Sans Expanded", sans-serif;
   font-optical-sizing: auto;
   font-weight: 100;
-}
+} */
 
 /* Arrow button base */
 .react-datepicker__navigation {

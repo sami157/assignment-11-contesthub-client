@@ -25,6 +25,7 @@ const Login = () => {
                 async () => {
                     await signInUser(data.email, data.password)
                     await navigate(`${location.state ? location.state : '/'}`)
+                    console.log(location.state)
                 },
                 {
                     loading: 'Logging in',

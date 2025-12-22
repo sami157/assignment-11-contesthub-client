@@ -1,30 +1,18 @@
-import { useNavigate } from "react-router";
-import Forbidden from "../components/error/Forbidden";
-import useAuth from "../hooks/useAuth";
-import useRole from "../hooks/useRole";
+import { Navigate, useLocation } from "react-router";
 import Loading from "../components/Loading";
+import useAuth from '../hooks/useAuth';
 
-const PrivateRoute = ({ role, children }) => {
-    const navigate = useNavigate()
-    const { user, loading } = useAuth();
-    const { role: userRole, roleLoading } = useRole();
-
-    if (loading || roleLoading) {
-        return <Loading/>;
-    }
-
-    if (!user) {
-        navigate('/login')
-    }
-
-    const allowedRoles = Array.isArray(role) ? role : [role];
-
-
-    if (!allowedRoles.includes(userRole)) {
-        return <Forbidden />;
-    }
-
-    return children;
+const PrivateRoute = ({ children }) => {
+    const location = useLocation()
+    const { loading, user } = useAuth()
+    return (
+        loading ? <Loading/>
+            : (
+                <div>
+                    {user ? children : <Navigate state={location.pathname} to='/login'></Navigate>}
+                </div>
+            )
+    );
 };
 
 export default PrivateRoute;
