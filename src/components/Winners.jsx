@@ -8,7 +8,7 @@ const Winners = () => {
     }
 
     return (
-        <section className="py-20 bg-gray-50" data-aos="fade-right">
+        <section className="py-20 bg-base-200" data-aos="fade-right">
             <div className="max-w-6xl mx-auto px-4 text-center">
                 <h2 className="text-4xl font-bold mb-4">
                     🎉 Our Champions
@@ -22,7 +22,7 @@ const Winners = () => {
                     {winners.map((winner, index) => (
                         <div
                             key={index}
-                            className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition"
+                            className="p-6 rounded-xl hover:shadow-lg transition"
                         >
                             <img
                                 src={winner.winnerImage}

@@ -5,6 +5,7 @@ import Winners from '../components/Winners'
 import PlatformStats from '../components/PlatformStats'
 import Aos from 'aos'
 import 'aos/dist/aos.css';
+import WhoWeAre from '../components/WhoWeAre'
 
 export default function Home() {
     useEffect(() => {
@@ -18,6 +19,7 @@ export default function Home() {
             <PopularContests/>
             <Winners/>
             <PlatformStats/>
+            <WhoWeAre/>
         </div>
     )
 }

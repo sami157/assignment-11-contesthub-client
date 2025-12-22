@@ -13,7 +13,7 @@ const ContestCard = ({ contest }) => {
             <div className="flex flex-col gap-2 flex-1 mt-3">
                 <h2 className="card-title">{contest.name}</h2>
 
-                <p className="text-sm text-gray-600 line-clamp-2">
+                <p className="text-sm text-base-content line-clamp-2">
                     {contest.description}
                 </p>
 
@@ -29,7 +29,7 @@ const ContestCard = ({ contest }) => {
                         </span>
                     </div>
                     <div>
-                        <button className="w-full bg-white px-4 py-2 rounded-lg drop-shadow-sm font-bold text-primary">
+                        <button className="w-full bg-base-100 px-4 py-2 rounded-lg drop-shadow-sm font-bold text-primary">
                             Details
                         </button>
                     </div>

@@ -118,134 +118,136 @@ const ContestDetails = () => {
     return (
         <div className="max-w-5xl mx-auto px-4 py-8 space-y-6 min-h-screen">
             {
-                isLoading && <Loading/>
-            }
-            <div className="flex justify-between items-center">
-                <div className="flex flex-col gap-4">
-                    <h1 className="title-font text-4xl font-bold">{contest.name}</h1>
-                    <div className="flex items-center gap-4 text-sm text-gray-600">
-                        <span className="badge badge-primary badge-outline">
-                            Participants: {contest.participantCount || 0}
-                        </span>
-                        <span className="badge badge-primary badge-outline">
-                            Price: {contest?.price}
-                        </span>
-                    </div>
-                </div>
-                {
-                    !ended &&
-                    <div>
-                        <div className="grid grid-flow-col gap-5 text-center auto-cols-max">
-                            <div className="flex font-bold rounded-xl flex-col p-2 bg-neutral text-neutral-content">
-                                <span className="countdown font-mono text-5xl">
-                                    <span style={{ "--value": timeLeft.days }}>{timeLeft.days}</span>
-                                </span>
-                                days
+                isLoading ? <Loading /> :
+                    <div className="flex flex-col gap-3">
+                        <div className="flex justify-between items-center">
+                            <div className="flex flex-col gap-4">
+                                <h1 className="title-font text-4xl font-bold">{contest?.name}</h1>
+                                <div className="flex items-center gap-4 text-sm text-gray-600">
+                                    <span className="badge badge-primary badge-outline">
+                                        Participants: {contest?.participantCount || 0}
+                                    </span>
+                                    <span className="badge badge-primary badge-outline">
+                                        Price: {contest?.price}
+                                    </span>
+                                </div>
                             </div>
-                            <div className="flex font-bold rounded-xl flex-col p-2 bg-neutral text-neutral-content">
-                                <span className="countdown font-mono text-5xl">
-                                    <span style={{ "--value": timeLeft.hours }}>{timeLeft.hours}</span>
-                                </span>
-                                hours
-                            </div>
-                            <div className="flex font-bold rounded-xl flex-col p-2 bg-neutral text-neutral-content">
-                                <span className="countdown font-mono text-5xl">
-                                    <span style={{ "--value": timeLeft.minutes }}>{timeLeft.minutes}</span>
-                                </span>
-                                min
-                            </div>
-                            <div className="flex font-bold rounded-xl flex-col p-2 bg-neutral text-neutral-content">
-                                <span className="countdown font-mono text-5xl">
-                                    <span style={{ "--value": timeLeft.seconds }}>{timeLeft.seconds}</span>
-                                </span>
-                                sec
-                            </div>
+                            {
+                                !ended &&
+                                <div>
+                                    <div className="grid grid-flow-col gap-5 text-center auto-cols-max">
+                                        <div className="flex font-bold rounded-xl flex-col p-2 bg-neutral text-neutral-content">
+                                            <span className="countdown font-mono text-5xl">
+                                                <span style={{ "--value": timeLeft.days }}>{timeLeft.days}</span>
+                                            </span>
+                                            days
+                                        </div>
+                                        <div className="flex font-bold rounded-xl flex-col p-2 bg-neutral text-neutral-content">
+                                            <span className="countdown font-mono text-5xl">
+                                                <span style={{ "--value": timeLeft.hours }}>{timeLeft.hours}</span>
+                                            </span>
+                                            hours
+                                        </div>
+                                        <div className="flex font-bold rounded-xl flex-col p-2 bg-neutral text-neutral-content">
+                                            <span className="countdown font-mono text-5xl">
+                                                <span style={{ "--value": timeLeft.minutes }}>{timeLeft.minutes}</span>
+                                            </span>
+                                            min
+                                        </div>
+                                        <div className="flex font-bold rounded-xl flex-col p-2 bg-neutral text-neutral-content">
+                                            <span className="countdown font-mono text-5xl">
+                                                <span style={{ "--value": timeLeft.seconds }}>{timeLeft.seconds}</span>
+                                            </span>
+                                            sec
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </div>
+
+                        <img
+                            src={contest.image}
+                            alt={contest.name}
+                            className="w-full h-72 object-cover rounded-xl"
+                        />
+
+                        <div>
+                            <h2 className="text-xl font-semibold mb-2">Contest Description</h2>
+                            <p className="text-gray-600 whitespace-pre-line">
+                                {contest.description}
+                            </p>
+                        </div>
+
+                        <div>
+                            <h2 className="text-xl font-semibold mb-2">Task Instructions</h2>
+                            <p className="text-gray-600 whitespace-pre-line">
+                                {contest.taskInstruction}
+                            </p>
+                        </div>
+
+                        {contest.winner && (
+                            <div className="border rounded-lg p-4 bg-base-200">
+                                <h2 className="text-xl font-semibold mb-2">Winner</h2>
+                                <div className="flex items-center gap-4">
+                                    <span className="font-bold">{contest.winner.name}</span>
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="flex gap-4">
+                            {!registrationStatus?.registered && (
+                                <button
+                                    disabled={ended || regLoading}
+                                    onClick={handleRegister}
+                                    className="btn btn-primary"
+                                >
+                                    {ended ? "Contest Ended" : "Register / Pay"}
+                                </button>
+                            )}
+                        </div>
+                        <dialog id="submit_task_modal" className="modal modal-bottom sm:modal-middle">
+                            <div className="modal-box">
+                                <h3 className="font-bold text-lg">Submit Your Task</h3>
+
+                                <p className="py-2 text-sm text-gray-500">
+                                    Provide necessary links (GitHub, Drive, live URL, etc.)
+                                </p>
+
+                                <textarea
+                                    className="textarea textarea-bordered w-full min-h-[120px]"
+                                    placeholder="Paste your submission links here..."
+                                    value={taskLinks}
+                                    onChange={(e) => setTaskLinks(e.target.value)}
+                                />
+
+                                <div className="modal-action">
+                                    <form method="dialog">
+                                        <button className="btn btn-ghost">Cancel</button>
+                                    </form>
+
+                                    <button
+                                        className="btn btn-primary"
+                                        disabled={submitLoading || !taskLinks.trim()}
+                                        onClick={handleTaskSubmit}
+                                    >
+                                        {submitLoading ? "Submitting..." : "Submit"}
+                                    </button>
+                                </div>
+                            </div>
+                        </dialog>
+
+                        {registrationStatus?.registered && !ended && (
+                            <button
+                                className="btn btn-success"
+                                onClick={() =>
+                                    document.getElementById("submit_task_modal").showModal()
+                                }
+                            >
+                                Submit Task
+                            </button>
+                        )}
                     </div>
-                }
-            </div>
-
-            <img
-                src={contest.image}
-                alt={contest.name}
-                className="w-full h-72 object-cover rounded-xl"
-            />
-
-            <div>
-                <h2 className="text-xl font-semibold mb-2">Contest Description</h2>
-                <p className="text-gray-600 whitespace-pre-line">
-                    {contest.description}
-                </p>
-            </div>
-
-            <div>
-                <h2 className="text-xl font-semibold mb-2">Task Instructions</h2>
-                <p className="text-gray-600 whitespace-pre-line">
-                    {contest.taskInstruction}
-                </p>
-            </div>
-
-            {contest.winner && (
-                <div className="border rounded-lg p-4 bg-base-200">
-                    <h2 className="text-xl font-semibold mb-2">Winner</h2>
-                    <div className="flex items-center gap-4">
-                        <span className="font-bold">{contest.winner.name}</span>
-                    </div>
-                </div>
-            )}
-
-            <div className="flex gap-4">
-                {!registrationStatus?.registered && (
-                    <button
-                        disabled={ended || regLoading}
-                        onClick={handleRegister}
-                        className="btn btn-primary"
-                    >
-                        {ended ? "Contest Ended" : "Register / Pay"}
-                    </button>
-                )}
-            </div>
-            <dialog id="submit_task_modal" className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box">
-                    <h3 className="font-bold text-lg">Submit Your Task</h3>
-
-                    <p className="py-2 text-sm text-gray-500">
-                        Provide necessary links (GitHub, Drive, live URL, etc.)
-                    </p>
-
-                    <textarea
-                        className="textarea textarea-bordered w-full min-h-[120px]"
-                        placeholder="Paste your submission links here..."
-                        value={taskLinks}
-                        onChange={(e) => setTaskLinks(e.target.value)}
-                    />
-
-                    <div className="modal-action">
-                        <form method="dialog">
-                            <button className="btn btn-ghost">Cancel</button>
-                        </form>
-
-                        <button
-                            className="btn btn-primary"
-                            disabled={submitLoading || !taskLinks.trim()}
-                            onClick={handleTaskSubmit}
-                        >
-                            {submitLoading ? "Submitting..." : "Submit"}
-                        </button>
-                    </div>
-                </div>
-            </dialog>
-
-            {registrationStatus?.registered && !ended && (
-                <button
-                    className="btn btn-success"
-                    onClick={() =>
-                        document.getElementById("submit_task_modal").showModal()
-                    }
-                >
-                    Submit Task
-                </button>
-            )}
+            }
         </div >
     );
 };

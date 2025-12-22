@@ -56,7 +56,7 @@ const AllContests = () => {
                     <button
                         key={type}
                         className={`tab rounded-lg capitalize ${activeType === type
-                                ? "bg-base-200 text-black font-bold"
+                                ? "bg-base-200 text-base-content font-bold"
                                 : ""
                             }`}
                         onClick={() => handleTypeChange(type)}
@@ -72,7 +72,7 @@ const AllContests = () => {
                     No contests found
                 </p>
             ) : (
-                <div className="grid w-11/12 mx-auto grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid w-11/12 mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     {contests.map((contest) => (
                         <ContestCard key={contest._id} contest={contest} />
                     ))}
