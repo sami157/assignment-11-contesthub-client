@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import ContestCard from "../components/ContestCard";
+import Loading from "../components/Loading";
 
 const AllContests = () => {
     const types = ["all", "image", "design", "article", "video"];
@@ -36,7 +37,7 @@ const AllContests = () => {
     };
 
     if (isLoading) {
-        return <p className="text-center">Loading contests...</p>;
+        return <Loading/>
     }
 
     if (isError) {

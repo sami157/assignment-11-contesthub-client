@@ -15,7 +15,7 @@ const Winners = () => {
                 </h2>
 
                 <p className="text-gray-600 mb-12">
-                    Real people. Real talent. Real rewards.
+                    Real people. Real talent. Real rewards
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

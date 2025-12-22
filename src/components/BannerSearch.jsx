@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useSearchContests from "../hooks/useSearchContests";
 import { useNavigate } from "react-router";
+import Loading from "./Loading";
 
 const BannerSearch = () => {
     const [searchText, setSearchText] = useState("");
@@ -26,7 +27,7 @@ const BannerSearch = () => {
 
                 <div className="mt-10 bg-white rounded-lg text-black shadow-lg">
                     {isLoading && (
-                        <p className="p-4 text-center">Loading...</p>
+                        <Loading/>
                     )}
 
                     {!isLoading && contests.length === 0 && searchText && (

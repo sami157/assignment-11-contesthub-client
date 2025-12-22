@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import Forbidden from "../components/error/Forbidden";
 import useAuth from "../hooks/useAuth";
 import useRole from "../hooks/useRole";
+import Loading from "../components/Loading";
 
 const PrivateRoute = ({ role, children }) => {
     const navigate = useNavigate()
@@ -9,7 +10,7 @@ const PrivateRoute = ({ role, children }) => {
     const { role: userRole, roleLoading } = useRole();
 
     if (loading || roleLoading) {
-        return <p className="text-center">Loading...</p>;
+        return <Loading/>;
     }
 
     if (!user) {

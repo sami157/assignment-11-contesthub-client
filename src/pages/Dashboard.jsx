@@ -7,6 +7,7 @@ import { IoPersonAdd } from "react-icons/io5";
 import { FaShield } from "react-icons/fa6";
 import { SiCkeditor4 } from "react-icons/si";
 import { MdDeleteForever } from "react-icons/md";
+import Loading from "../components/Loading";
 
 const Dashboard = () => {
     const axiosSecure = useAxiosSecure();
@@ -117,7 +118,7 @@ const Dashboard = () => {
         }
     }, [isLoading, isSuccess, isError]);
 
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) return <Loading/>
     if (isError) return <p>Error fetching users.</p>;
 
     return (

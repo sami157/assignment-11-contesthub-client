@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
+import Loading from "./Loading";
 
 const ContestDetails = () => {
     const { id } = useParams();
@@ -49,8 +50,6 @@ const ContestDetails = () => {
             setSubmitLoading(false);
         }
     };
-
-
 
     const { data: registrationStatus, isLoading: regLoading } = useQuery({
         queryKey: ["registration-status", id, user?.email],
@@ -116,7 +115,7 @@ const ContestDetails = () => {
     };
 
 
-    if (isLoading) return <p className="text-center">Loading contest...</p>;
+    if (isLoading) return <Loading/>
     if (isError) return <p className="text-center text-error">Failed to load contest</p>;
     return (
         <div className="max-w-5xl mx-auto px-4 py-8 space-y-6 min-h-screen">

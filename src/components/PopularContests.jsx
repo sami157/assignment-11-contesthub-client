@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import ContestCard from "./ContestCard";
 import { useNavigate } from "react-router";
+import Loading from "../components/Loading";
 
 const PopularContests = () => {
     const axiosSecure = useAxiosSecure();
@@ -16,7 +17,7 @@ const PopularContests = () => {
     });
 
     if (isLoading) {
-        return <p className="text-center">Loading popular contests...</p>;
+        return <Loading/>
     }
 
     return (
