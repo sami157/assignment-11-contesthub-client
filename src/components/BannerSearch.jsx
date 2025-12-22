@@ -22,10 +22,10 @@ const BannerSearch = () => {
                     placeholder="Type contest category to search (Image, Design...)"
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}
-                    className="w-full max-w-2xl mx-auto p-4 rounded-lg text-black drop-shadow-2xl outline-none bg-base-300/60 backdrop-blur-2xl"
+                    className="w-full max-w-2xl mx-auto p-4 rounded-lg text-base-content drop-shadow-2xl outline-none bg-base-300/60 backdrop-blur-2xl"
                 />
 
-                <div className="mt-10 bg-white rounded-lg text-black shadow-lg">
+                <div className="mt-10 bg-base-100/75 rounded-lg text-base-content backdrop-blur-2xl shadow-2xl">
                     {isLoading && (
                         <Loading/>
                     )}
