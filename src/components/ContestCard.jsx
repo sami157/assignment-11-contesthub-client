@@ -27,6 +27,9 @@ const ContestCard = ({ contest }) => {
                         <span className="badge badge-outline capitalize">
                             Participants: {contest.participantCount}
                         </span>
+                        <span className="ml-2 badge badge-outline capitalize">
+                            Deadline: {contest.deadline.slice(0,10)}
+                        </span>
                     </div>
                     <div>
                         <button className="w-full bg-base-100 px-4 py-2 rounded-lg drop-shadow-sm font-bold text-primary">

@@ -49,7 +49,7 @@ const AllContests = () => {
     }
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 min-h-screen">
             {/* Tabs */}
             <div className="tabs w-full rounded-xl tabs-boxed justify-center">
                 {types.map((type) => (

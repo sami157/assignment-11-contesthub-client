@@ -40,7 +40,7 @@ const ContestsCreated = () => {
         }
     };
 
-    
+
     const handleUpdate = async (contestId, updatedData) => {
         const res = await axiosSecure.put(`/contests/update/${contestId}`, updatedData);
         queryClient.invalidateQueries(["creatorContests"]);
@@ -73,7 +73,7 @@ const ContestsCreated = () => {
     }
 
     return (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto flex items-center flex-col gap-4">
             <table className="table w-full">
                 <thead>
                     <tr>
@@ -127,14 +127,16 @@ const ContestsCreated = () => {
                                         <MdDeleteForever className="text-gray-400" />
                                     </button>
                                 }
-                                <button className="tooltip" data-tip='See submissions'>
-                                    <FaMagnifyingGlassArrowRight onClick={() => {navigate('/submissions')}} className="hover:cursor-pointer" />
-                                </button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            <div>
+                <button onClick={() => { navigate('/submissions') }} className="tooltip flex items-center btn" data-tip='See submissions'>
+                    <FaMagnifyingGlassArrowRight className="hover:cursor-pointer"></FaMagnifyingGlassArrowRight> <p>See All Submissions</p>
+                </button>
+            </div>
 
             {isModalOpen && selectedContest && (
                 <EditContestModal

@@ -25,7 +25,6 @@ const Login = () => {
                 async () => {
                     await signInUser(data.email, data.password)
                     await navigate(`${location.state ? location.state : '/'}`)
-                    console.log(location.state)
                 },
                 {
                     loading: 'Logging in',
@@ -42,16 +41,15 @@ const Login = () => {
             toast.promise(
                 async () => {
                     await signInUser('', '', true)
-                    registerUser(axiosSecure, {
+                    navigate(`${location.state ? location.state : '/'}`)
+                    await registerUser(axiosSecure, {
                         name: user.displayName,
                         email: user.email
                     })
-                    navigate(`${location.state ? location.state : '/'}`)
                 },
                 {
                     loading: 'Google Login in progress',
-                    success: 'Logged in with Google Successfully',
-                    error: 'Google Login failed',
+                    success: 'Logged in with Google Successfully'
                 }
             )
         } catch (error) {

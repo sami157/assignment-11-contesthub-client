@@ -36,7 +36,6 @@ const Submissions = () => {
 
     const handleDeclareWinner = async (submission) => {
         try {
-            console.log(selectedSubmission);
             await axiosSecure.put(
                 `contests/${submission.contestId}/declare-winner`,
                 { submissionId: submission._id }

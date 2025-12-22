@@ -12,7 +12,6 @@ const ContestsParticipated = () => {
         queryKey: ["my-participated-contests"],
         queryFn: async () => {
             const res = await axiosSecure.get("/registrations/my-contests");
-            console.log(res.data);
             return res.data;
         }
     });

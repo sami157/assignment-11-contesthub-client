@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import Loading from "./Loading";
 
 const WinningContests = () => {
     const axiosSecure = useAxiosSecure();
@@ -13,13 +14,13 @@ const WinningContests = () => {
     });
 
     if (isLoading) {
-        return <p className="text-center">Loading winning contests...</p>;
+        return <Loading/>
     }
 
     if (contests.length === 0) {
         return (
             <p className="text-center text-gray-500">
-                You haven’t won any contests yet.
+                You haven't won any contests yet.
             </p>
         );
     }
@@ -29,7 +30,7 @@ const WinningContests = () => {
             {contests.map((contest) => (
                 <div
                     key={contest._id}
-                    className="bg-base-200 rounded-xl shadow p-4 flex flex-col"
+                    className="bg-base-200 rounded-xl p-2 flex flex-col"
                 >
                     <img
                         src={contest.image}
@@ -41,14 +42,9 @@ const WinningContests = () => {
                         {contest.name}
                     </h3>
 
-                    <p className="text-sm text-gray-500 mb-2">
-                        Deadline:{" "}
-                        {new Date(contest.deadline).toLocaleDateString()}
-                    </p>
-
                     <div className="mt-auto">
-                        <span className="badge badge-success badge-outline">
-                            🏆 Prize Won: ${contest.prizeMoney}
+                        <span className="btn">
+                            Prize Won: ${contest.prizeMoney}
                         </span>
                     </div>
                 </div>

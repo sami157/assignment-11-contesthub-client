@@ -24,8 +24,6 @@ const PaymentSuccess = () => {
                 const res = await axiosSecure.get(
                     `/payments/success?id=${sessionId}`
                 );
-
-                toast.success(res.data.message || "Payment successful");
             } catch {
                 toast.error("Payment verification failed");
                 navigate("/");
@@ -36,9 +34,10 @@ const PaymentSuccess = () => {
     }, [searchParams, axiosSecure, navigate]);
 
     return (
-        <div className="flex flex-col items-center justify-start">
+        <div className="flex flex-col gap-2 items-center justify-start">
+            <p className="text-xl">You Registered Successfully</p>
             <Lottie className="scale-100" animationData={paymentSuccess} loop={false} />
-            <NavLink to='/' className='bg-primary font-bold px-4 py-2 text-primary-content rounded-full'>Go Home</NavLink>
+            <NavLink to='/contests-participated' className='bg-primary font-bold px-4 py-2 text-primary-content rounded-full'>My Participations</NavLink>
         </div>
     );
 };
