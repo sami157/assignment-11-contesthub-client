@@ -1,7 +1,7 @@
 # ContestHub – Creative Contest Management Platform
 
 ## Live Website
-https://your-live-site-url.com
+https://a11-contesthub.web.app/
 
 ---
 
@@ -133,4 +133,3 @@ ContestHub is a complete full-stack application that demonstrates practical impl
 ## Author
 
 **Tanzir Ahmed Sami**  
-Full-Stack Web Developer
