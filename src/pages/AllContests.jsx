@@ -72,7 +72,7 @@ const AllContests = () => {
                     No contests found
                 </p>
             ) : (
-                <div className="grid w-11/12 mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div className="grid w-[95vw] md:w-11/12 lg:w-4/5 mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {contests.map((contest) => (
                         <ContestCard key={contest._id} contest={contest} />
                     ))}

@@ -1,4 +1,5 @@
 import useWinners from "../hooks/useWinners";
+import { IoTrophy } from "react-icons/io5";
 
 const Winners = () => {
     const { data: winners = [], isLoading } = useWinners();
@@ -24,10 +25,8 @@ const Winners = () => {
                             key={index}
                             className="p-6 rounded-xl hover:shadow-lg transition"
                         >
-                            <img
-                                src={winner.winnerImage}
-                                alt={winner.winnerName}
-                                className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
+                            <IoTrophy
+                                className="w-16 h-16 rounded-full bg-base-100 p-3 mx-auto mb-4 object-cover"
                             />
 
                             <h3 className="font-semibold text-lg">

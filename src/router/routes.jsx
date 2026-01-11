@@ -17,11 +17,13 @@ import PaymentSuccess from "../pages/PaymentSuccess";
 import Submissions from "../pages/Submissions";
 import UserDashboard from "../pages/UserDashboard";
 import Leaderboard from "../pages/LeaderBoard";
+import Welcome from "../components/Welcome";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         Component: HomeLayout,
+        HydrateFallback: Welcome,
         children: [
             {
                 index: true,

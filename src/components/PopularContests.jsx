@@ -3,6 +3,7 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import ContestCard from "./ContestCard";
 import { useNavigate } from "react-router";
 import Loading from "../components/Loading";
+import { IoMdListBox } from "react-icons/io";
 
 const PopularContests = () => {
     const axiosSecure = useAxiosSecure();
@@ -26,9 +27,9 @@ const PopularContests = () => {
                 <h2 className="text-2xl font-bold">Popular Contests</h2>
                 <button
                     onClick={() => navigate("/all-contests")}
-                    className="btn btn-sm"
+                    className="btn flex gap-1 items-center btn-sm transition active:scale-80"
                 >
-                    Show All
+                    <IoMdListBox className="text-xl" />Show All
                 </button>
             </div>
 

@@ -6,6 +6,7 @@ import PlatformStats from '../components/PlatformStats'
 import Aos from 'aos'
 import 'aos/dist/aos.css';
 import WhoWeAre from '../components/WhoWeAre'
+import Welcome from '../components/Welcome'
 
 export default function Home() {
     useEffect(() => {
