@@ -6,11 +6,11 @@ import { Toaster } from "react-hot-toast"
 function HomeLayout() {
 
   return (
-    <div className="flex flex-col gap-5 px-[2vw] py-[1vw]">
+    <div className="space-y-5 pt-24 px-[2vw] py-[1vw]">
       <Navbar/>
-      <Outlet/>
-      <Footer/>
-      <Toaster/>
+      <Outlet />
+      <Footer />
+      <Toaster />
     </div>
   )
 }

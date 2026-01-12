@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link, NavLink, useNavigate } from 'react-router'
-import logo from '../assets/logo.png'
+// import logo from '../assets/logo.png'
 import useAuth from '../hooks/useAuth'
 import toast from 'react-hot-toast'
 import useRole from '../hooks/useRole'
 import ThemeToggle from './ThemeToggle'
+import Lottie from 'lottie-react'
+import welcome from '../assets/animation/welcome.json'
 
 export default function Navbar() {
     const { user, signOutUser } = useAuth()
@@ -30,12 +32,15 @@ export default function Navbar() {
     }
 
     return (
-        <div className="bg-base-300 px-3 py-2 rounded-full">
+        <div className="fixed top-3 left-6 right-6 z-50 bg-base-300/80 backdrop-blur-2xl px-3 py-2 rounded-full">
             <div className="flex items-center justify-between">
 
                 {/* Logo */}
                 <Link viewTransition to="/" className="flex items-center">
-                    <img className="w-28 sm:w-36 md:w-40 -mx-4 sm:-mx-6" src={logo} />
+                    {/* <img className="w-28 sm:w-36 md:w-40 -mx-4 sm:-mx-6" src={logo} /> */}
+                    <Lottie
+                        className='w-25 mx-2 sm:mx-2'
+                        animationData={welcome} loop={true} />
                     <div className="hidden sm:block">
                         <p className="text-xl md:text-2xl -mb-1">Contest</p>
                         <p className="text-xl md:text-2xl font-extrabold">Hub</p>

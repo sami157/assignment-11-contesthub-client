@@ -1,4 +1,4 @@
-import logo from '../assets/logo.png'
+// import logo from '../assets/logo.png'
 import { FaSquareFacebook, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import welcome from '../assets/animation/welcome.json'
